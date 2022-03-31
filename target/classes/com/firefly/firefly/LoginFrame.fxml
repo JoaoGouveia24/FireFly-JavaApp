@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.LoginController">
+   <children>
+      <ImageView fx:id="ContentImg" fitHeight="310.0" fitWidth="505.0" layoutX="685.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/slider/img3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="338.0" fitWidth="523.0" layoutX="672.0" layoutY="177.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/slider/Cape.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="750.0" fitWidth="1265.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/Login/Fundo.png" />
+         </image>
+      </ImageView>
+      <JFXRadioButton fx:id="Slider" layoutX="870.0" layoutY="516.0" onAction="#changeOne" selected="true" textFill="#2e2e2e">
+         <selectedColor>
+            <Color red="0.40784314274787903" green="0.7960784435272217" blue="0.8313725590705872" />
+         </selectedColor>
+         <unSelectedColor>
+            <Color red="1.0" green="1.0" blue="1.0" />
+         </unSelectedColor>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="Slider1" layoutX="908.0" layoutY="516.0" onAction="#changeOne" textFill="#2e2e2e">
+         <selectedColor>
+            <Color red="0.40784314274787903" green="0.7960784435272217" blue="0.8313725590705872" />
+         </selectedColor>
+         <unSelectedColor>
+            <Color red="1.0" green="1.0" blue="1.0" />
+         </unSelectedColor>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="Slider2" layoutX="946.0" layoutY="516.0" onAction="#changeOne" textFill="#2e2e2e">
+         <selectedColor>
+            <Color red="0.40784314274787903" green="0.7960784435272217" blue="0.8313725590705872" />
+         </selectedColor>
+         <unSelectedColor>
+            <Color red="1.0" green="1.0" blue="1.0" />
+         </unSelectedColor>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXRadioButton>
+      <Pane focusTraversable="true" layoutX="95.0" layoutY="85.0" prefHeight="540.0" prefWidth="278.0" style="-fx-background-color: #3d3d3d; -fx-background-radius: 25;">
+         <children>
+            <ImageView fitHeight="411.0" fitWidth="558.0" layoutX="-65.0" layoutY="-101.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/Logo_FirefliyV2.png" />
+               </image>
+            </ImageView>
+            <JFXTextField id="LoginUser" fx:id="LoginUsername" focusColor="#7af4ff" labelFloat="true" layoutX="39.0" layoutY="194.0" prefHeight="34.0" prefWidth="202.0" promptText="Username" style="-fx-text-inner-color: white;" stylesheets="@Style.css" unFocusColor="WHITE" />
+            <JFXPasswordField id="LoginPass" fx:id="LoginPassword" focusColor="#7af4ff" labelFloat="true" layoutX="39.0" layoutY="270.0" prefHeight="34.0" prefWidth="202.0" promptText="Password" style="-fx-text-inner-color: white;" stylesheets="@Style.css" unFocusColor="WHITE" />
+            <JFXButton fx:id="LoginBtn" defaultButton="true" layoutX="39.0" layoutY="390.0" onAction="#Login" prefHeight="25.0" prefWidth="202.0" style="-fx-background-color: #68cbd4; -fx-background-radius: 20;" text="Login">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="46.0" layoutY="324.0" prefHeight="17.0" prefWidth="128.0" text="Don't have an account?" textFill="WHITE" />
+            <JFXButton defaultButton="true" layoutX="174.0" layoutY="320.0" onAction="#changeRegistrar1" prefHeight="25.0" prefWidth="77.0" text="Click Here!" textFill="#68cbd4">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label fx:id="lb1" layoutX="53.0" layoutY="355.0" text="Username or Password incorrect!" textFill="#6acdd4" visible="false" />
+            <JFXTextField fx:id="PassSee" layoutX="39.0" layoutY="270.0" prefHeight="34.0" prefWidth="202.0" visible="false" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

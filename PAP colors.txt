@@ -1,0 +1,2 @@
+rosa: #e1aaff;
+Lilaz: #a3b6ff

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.RegisterController">
+   <children>
+      <ImageView fitHeight="750.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/Registar/RegistarFundo.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="cancel" buttonType="RAISED" layoutX="105.0" layoutY="645.0" onAction="#changeLogin" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #2e2e2e;" text="Cancel" textFill="#68cbd4" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="next" buttonType="RAISED" layoutX="966.0" layoutY="633.0" onAction="#Regist" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #68cbd4;" text="Finish">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="92.0" layoutY="-10.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/Logo1.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="245.0" layoutY="140.0" prefHeight="368.0" prefWidth="711.0" style="-fx-background-color: #3d3d3d; -fx-background-radius: 25;">
+         <children>
+            <Label layoutX="311.0" layoutY="14.0" prefHeight="39.0" prefWidth="90.0" text="F I R E F L Y" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="Username" focusColor="#6acdd4" labelFloat="true" layoutX="67.0" layoutY="95.0" prefHeight="39.0" prefWidth="198.0" promptText="Username" style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
+            <JFXTextField fx:id="Email" focusColor="#6acdd4" labelFloat="true" layoutX="67.0" layoutY="177.0" prefHeight="39.0" prefWidth="198.0" promptText="Email" style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
+            <JFXPasswordField fx:id="Password" focusColor="#6acdd4" labelFloat="true" layoutX="438.0" layoutY="95.0" prefHeight="39.0" prefWidth="198.0" promptText="Password" style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
+            <JFXPasswordField fx:id="PasswordC" focusColor="#6acdd4" labelFloat="true" layoutX="438.0" layoutY="177.0" prefHeight="39.0" prefWidth="198.0" promptText="Comfirm Password" style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
+            <JFXCheckBox fx:id="DCL" checkedColor="#6acdd4" layoutX="193.0" layoutY="304.0" prefHeight="18.0" prefWidth="326.0" text="I hereby declare that I accept the terms and conditions..." textFill="WHITE" unCheckedColor="WHITE" underline="true" />
+            <Label fx:id="User" layoutX="294.0" layoutY="246.0" prefHeight="39.0" prefWidth="124.0" text="Username field is Empty!" textFill="#6acdd4" visible="false">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="emailt" layoutX="294.0" layoutY="246.0" prefHeight="39.0" prefWidth="124.0" text="Email field is Empty!" textAlignment="JUSTIFY" textFill="#6acdd4" visible="false">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="Pass" layoutX="294.0" layoutY="246.0" prefHeight="39.0" prefWidth="124.0" text="Passwords do not match!" textAlignment="JUSTIFY" textFill="#6acdd4" visible="false">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="PassN" layoutX="294.0" layoutY="246.0" prefHeight="39.0" prefWidth="124.0" text="Password field is Empty!" textAlignment="JUSTIFY" textFill="#6acdd4" visible="false">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <JFXCheckBox fx:id="SeePass" checkedColor="#6acdd4" layoutX="483.0" layoutY="228.0" onAction="#See" text="Show Password" textFill="WHITE" unCheckedColor="WHITE" />
+            <JFXTextField fx:id="SCP" focusColor="#6acdd4" labelFloat="true" layoutX="438.0" layoutY="177.0" prefHeight="39.0" prefWidth="198.0" promptText="Comfirm Password" style="-fx-text-inner-color: white;" unFocusColor="WHITE" visible="false" />
+            <JFXTextField fx:id="SCP1" focusColor="#6acdd4" labelFloat="true" layoutX="438.0" layoutY="95.0" prefHeight="39.0" prefWidth="198.0" promptText="Password" style="-fx-text-inner-color: white;" unFocusColor="WHITE" visible="false" />
+            <Label fx:id="Declare" layoutX="225.0" layoutY="246.0" prefHeight="39.0" prefWidth="263.0" text="You need to check the terms and conditions before..." textAlignment="JUSTIFY" textFill="#6acdd4" visible="false">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="Lengh" layoutX="249.0" layoutY="258.0" text="Password must be at least 9 characters long!" textFill="#6acdd4" visible="false">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="mail" layoutX="323.0" layoutY="258.0" text="Invalid email!" textFill="#6acdd4" visible="false">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
