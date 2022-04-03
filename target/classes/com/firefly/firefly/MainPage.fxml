@@ -9,7 +9,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
@@ -36,7 +38,7 @@
             <Slider fx:id="TimeP" layoutX="312.0" layoutY="54.0" prefHeight="14.0" prefWidth="576.0" />
             <Label fx:id="TimeRight" layoutX="900.0" layoutY="52.0" text="00:00" textFill="WHITE" />
             <Label fx:id="TimeLeft" layoutX="268.0" layoutY="52.0" text="00:00" textFill="WHITE" />
-            <ImageView fx:id="Play" fitHeight="30.0" fitWidth="25.0" layoutX="588.0" layoutY="16.0"  pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Play" fitHeight="30.0" fitWidth="25.0" layoutX="588.0" layoutY="16.0" onMouseClicked="#play" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-play-30.png" />
                </image>
@@ -44,7 +46,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="Pause" fitHeight="30.0" fitWidth="25.0" layoutX="588.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="Pause" fitHeight="30.0" fitWidth="25.0" layoutX="588.0" layoutY="16.0" onMouseClicked="#play" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-pause-30.png" />
                </image>
@@ -123,5 +125,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <StackPane fx:id="ViewContainer" layoutX="57.0" layoutY="541.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 40;">
+         <children>
+            <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" />
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

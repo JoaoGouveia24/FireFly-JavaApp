@@ -18,6 +18,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -58,6 +59,14 @@ public class MainController implements Initializable{
     private ImageView Replay;
     @FXML
     private ImageView Shuffle;
+    //Media
+    private MediaPlayer mediaPlayer;
+    private Media media;
+    @FXML
+    private MediaView mediaView;
+    @FXML
+    private StackPane ViewContainer;
+
     //Logout button
     @FXML
     private ImageView Log1;
@@ -79,15 +88,20 @@ public class MainController implements Initializable{
     private boolean isMuted = false;
 
 
-    public void play1() throws SQLException {
-        DatabaseConnetion connetion = new DatabaseConnetion();
-        connetion.ligar();
-        Connection conectDB = connetion.getCon();
+    public void play(){
 
-        PreparedStatement ps;
+        if(Play.isVisible()) {
+            Play.setVisible(false);
+            Pause.setVisible(true);
+            PlayMedia();
 
-        ps = conectDB.prepareStatement("SELECT * FROM Musica WHERE Musica_Id=1");
+        }else{
+            Pause.setVisible(false);
+            Play.setVisible(true);
+            PauseMedia();
+        }
     }
+
 
 
     //Change color
@@ -141,51 +155,16 @@ public class MainController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        try {
-            Path = new URL("https://ipfs.io/ipfs/QmSE4ZTXQqfJjv3ah4Dq23T6DdcmvMFaD16EReamLWD2Rt?filename=reasons.mp3");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        audio.volumeProperty().bindBidirectional(Volume.valueProperty());
-
-        Volume.valueProperty().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                audio.setVolume(Volume.getValue());
-                VolumeRate.setText(Volume.valueProperty().intValue() + "%");
-
-                if (audio.getVolume() != 0) {
-                    //Por uma imagem a dizer que está mutado...
-                    isMuted = false;
-                } else {
-                    isMuted = true;
-                }
-            }
-        });
+        media = new Media("https://www.youtube.com/watch?v=aOPcCIuuMhg");
+        mediaPlayer = new MediaPlayer(media);
+        mediaView = new MediaView(mediaPlayer);
+        mediaPlayer.setVolume(100);
+    }
+    void PlayMedia(){
+        mediaPlayer.play();
+    }
+    void PauseMedia(){
+        mediaPlayer.pause();
     }
 
-    public void StartM() {
-
-        audio = new AudioClip(Path.toExternalForm());
-
-        if (EndVideo == true) {
-            TimeP.setValue(0);
-            EndVideo = false;
-            isPlaying = false;
-        }
-        if (isPlaying == true) {
-            audio.stop();
-            Play.setVisible(false);
-            Pause.setVisible(true);
-            isPlaying = false;
-        } else {
-            Play.setVisible(true);
-            Pause.setVisible(false);
-            audio.play();
-            isPlaying = true;
-        }
-
-    }
 }
