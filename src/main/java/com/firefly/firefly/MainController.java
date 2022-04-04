@@ -1,11 +1,9 @@
 package com.firefly.firefly;
 
-import com.firefly.firefly.Sql.DatabaseConnetion;
+import com.jfoenix.controls.JFXButton;
 import javafx.animation.*;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,24 +13,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
-import java.util.concurrent.Callable;
 
 
 public class MainController implements Initializable{
@@ -62,10 +58,11 @@ public class MainController implements Initializable{
     //Media
     private MediaPlayer mediaPlayer;
     private Media media;
+    private URI Media_URL = URI.create("https://www.dropbox.com/s/cxwq6qne7g4thg3/uchiha-prod-jurrivh.mp3?dl=0");
     @FXML
-    private MediaView mediaView;
-    @FXML
-    private StackPane ViewContainer;
+    private ImageView Tumb;
+
+
 
     //Logout button
     @FXML
@@ -80,26 +77,18 @@ public class MainController implements Initializable{
     private Label VolumeRate;
     @FXML
     private AudioClip audio;
-
-    private URL Path;
-
-    private boolean EndVideo = false;
-    private boolean isPlaying = false;
-    private boolean isMuted = false;
-
+    @FXML
+    private JFXButton PlayBTN;
 
     public void play(){
-
-        if(Play.isVisible()) {
-            Play.setVisible(false);
-            Pause.setVisible(true);
-            PlayMedia();
-
+        mediaPlayer.play();
+        if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING){
+            PlayBTN.setText("||");
         }else{
-            Pause.setVisible(false);
-            Play.setVisible(true);
-            PauseMedia();
+            mediaPlayer.pause();
+            PlayBTN.setText(">");
         }
+
     }
 
 
@@ -153,18 +142,23 @@ public class MainController implements Initializable{
 
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        media = new Media("https://www.youtube.com/watch?v=aOPcCIuuMhg");
+        media = new Media(Media_URL.toString());
         mediaPlayer = new MediaPlayer(media);
-        mediaView = new MediaView(mediaPlayer);
         mediaPlayer.setVolume(100);
-    }
-    void PlayMedia(){
-        mediaPlayer.play();
-    }
-    void PauseMedia(){
-        mediaPlayer.pause();
+        //Tumb = new ImageView(new Image(TumbURL));
+
+
+        PlayBTN.setOnAction(event->{
+            if(mediaPlayer.getStatus() != MediaPlayer.Status.PLAYING){
+                mediaPlayer.play();
+            }
+        });
+
+
     }
 
 }
