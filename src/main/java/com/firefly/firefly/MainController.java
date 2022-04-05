@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
@@ -21,8 +22,11 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.nio.file.Files;
@@ -58,7 +62,8 @@ public class MainController implements Initializable{
     //Media
     private MediaPlayer mediaPlayer;
     private Media media;
-    private URI Media_URL = URI.create("https://www.dropbox.com/s/cxwq6qne7g4thg3/uchiha-prod-jurrivh.mp3?dl=0");
+    private String Media_URL = null;
+
     @FXML
     private ImageView Tumb;
 
@@ -80,6 +85,9 @@ public class MainController implements Initializable{
     @FXML
     private JFXButton PlayBTN;
 
+    public MainController() throws MalformedURLException {
+    }
+
     public void play(){
         mediaPlayer.play();
         if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING){
@@ -90,9 +98,6 @@ public class MainController implements Initializable{
         }
 
     }
-
-
-
     //Change color
 
     public void ChangeLogEnt() {
@@ -146,17 +151,10 @@ public class MainController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        media = new Media(Media_URL.toString());
+        media = new Media(Media_URL);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(100);
-        //Tumb = new ImageView(new Image(TumbURL));
-
-
-        PlayBTN.setOnAction(event->{
-            if(mediaPlayer.getStatus() != MediaPlayer.Status.PLAYING){
-                mediaPlayer.play();
-            }
-        });
+        //Tumb = new ImageView(new Image(TumbURL))
 
 
     }
