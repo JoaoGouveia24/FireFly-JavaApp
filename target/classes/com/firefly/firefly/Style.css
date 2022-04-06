@@ -1,0 +1,22 @@
+/* Volume */
+.volumeId>.thumb {
+    -fx-background-color:  #2e2e2e;
+}
+.volumeId>.animated-thumb {
+    -fx-background-color:  #2e2e2e;
+}
+.volumeId>.colored-track{
+    -fx-background-color: linear-gradient(to right, #303030, #7104c9);
+}
+
+
+/* Timer */
+.Time>.thumb{
+    -fx-background-color: #2e2e2e;
+}
+.Time>.animated-thumb{
+    -fx-background-color:  #2e2e2e;
+}
+.Time>.colored-track{
+    -fx-background-color: linear-gradient(to right, #303030, #7104c9);
+}

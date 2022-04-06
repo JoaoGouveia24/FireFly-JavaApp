@@ -1,116 +1,96 @@
 package com.firefly.firefly;
 
-import com.jfoenix.controls.JFXButton;
+
+import com.jfoenix.controls.JFXSlider;
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.ResourceBundle;
 
+
+//===========================================================================//
+//==============================Main Class===================================//
+//===========================================================================//
 
 public class MainController implements Initializable{
 
     @FXML
     private Pane root;
+    //==========Player=========//
     @FXML
-    private Slider TimeP;
+    private JFXSlider TimeP;
     @FXML
-    private Label TimeLeft;
+    private JFXSlider Volume;
+    @FXML
+    private ImageView PauseImg;
+    @FXML
+    private ImageView PlayImg;
     @FXML
     private Label TimeRight;
-
-    //MediaPlayer
-    @FXML
-    private ImageView Play;
-    @FXML
-    private ImageView Pause;
-    @FXML
-    private ImageView Back;
     @FXML
     private ImageView Forward;
     @FXML
     private ImageView Replay;
     @FXML
     private ImageView Shuffle;
-    //Media
-    private MediaPlayer mediaPlayer;
-    private Media media;
-    private String Media_URL = null;
-
     @FXML
     private ImageView Tumb;
-
-
-
-    //Logout button
+    //=======Media Player=======//
+    private MediaPlayer mediaPlayer;
+    private Media media;
+    private String Media_URL = "C:/Users/gouve/Dropbox/FireFlyDatabase/Music/on-my-own-ft-kid-cudi-official-audio.mp3";
+    private Duration duration;
+    //======Log Out Buttons=====//
     @FXML
     private ImageView Log1;
     @FXML
     private ImageView Log2;
 
-    //MediaPlayer
-    @FXML
-    private Slider Volume;
-    @FXML
-    private Label VolumeRate;
-    @FXML
-    private AudioClip audio;
-    @FXML
-    private JFXButton PlayBTN;
+    //===========================================================================//
+    //============================Methods Above==================================//
+    //===========================================================================//
 
-    public MainController() throws MalformedURLException {
+    public void PlayMusic(){
+            if (mediaPlayer.getStatus() != MediaPlayer.Status.PLAYING) {
+                PlayImg.setVisible(false);
+                PauseImg.setVisible(true);
+                mediaPlayer.play();
+            } else {
+                PauseImg.setVisible(false);
+                PlayImg.setVisible(true);
+                mediaPlayer.pause();
+            }
     }
 
-    public void play(){
-        mediaPlayer.play();
-        if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING){
-            PlayBTN.setText("||");
-        }else{
-            mediaPlayer.pause();
-            PlayBTN.setText(">");
-        }
-
-    }
-    //Change color
-
+    //Methods to ensere the animation of the Log out button...
     public void ChangeLogEnt() {
         Log1.setVisible(false);
         Log2.setVisible(true);
     }
-
     public void ChangeLogExi() {
         Log2.setVisible(false);
         Log1.setVisible(true);
     }
 
-
+    //Methods to start the logout animation panel...
     public void LogOut() {
 
         root.setVisible(true);
@@ -122,9 +102,7 @@ public class MainController implements Initializable{
         root.setOpacity(100);
         //Play animation
         transition.play();
-
     }
-
     public void noth() {
         root.setVisible(false);
 
@@ -134,29 +112,65 @@ public class MainController implements Initializable{
         transition.setNode(root);
 
         transition.play();
-        //root.setOpacity(0);
     }
-
+    //Change scene to LoginFrame....
     public void Logout(ActionEvent event) throws IOException {
-
+        mediaPlayer.stop();
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("LoginFrame.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(TableViewScene);
         window.show();
-
     }
 
-
-
+    //Methods to
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        media = new Media(Media_URL);
+
+        File file = new File(Media_URL);
+
+        try {
+            media = new Media(file.toURI().toURL().toExternalForm());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(100);
-        //Tumb = new ImageView(new Image(TumbURL))
 
+        mediaPlayer.volumeProperty().bindBidirectional(Volume.valueProperty());
 
+        Platform.runLater(() -> {
+
+            Volume.valueProperty().addListener(ov -> {
+                if(Volume.isValueChanging()) {
+                    mediaPlayer.setVolume(Volume.getValue());
+                }
+            });
+            mediaPlayer.currentCountProperty().addListener(ov -> {
+                duration = mediaPlayer.getMedia().getDuration();
+                actvalores();
+            });
+            TimeP.valueProperty().addListener(ov -> {
+                if(TimeP.isPressed()) {
+                    mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(TimeP.getValue()/100));
+                }
+            });
+        });
     }
 
+    //Responsible to stop the Threads running...
+    public void stop() {
+        Platform.exit();
+    }
+
+    //actvalores refreshs the values on the current media slider...
+    public void actvalores() {
+        if(TimeP != null) {
+            Platform.runLater(() -> {
+                if(!TimeP.isDisable() && duration.greaterThan(Duration.ZERO) && !TimeP.isValueChanging()){
+                    TimeP.setValue(mediaPlayer.getCurrentTime().divide(duration.toMillis()).toMillis()*100.0);
+                }
+            });
+        }
+    }
 }

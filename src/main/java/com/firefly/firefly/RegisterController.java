@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 import java.io.IOException;
@@ -50,6 +51,8 @@ public class RegisterController {
     private  Label mail;
     @FXML
     private boolean ver = false;
+    //Alert
+    private Alert alert;
 
     //Finish Button
     @FXML
@@ -162,6 +165,8 @@ public class RegisterController {
     private void showAlert(Alert.AlertType error, String string, String string2) {
         Alert alert = new Alert(error);
         alert.setTitle(string);
+        alert.getDialogPane().setMaxWidth(400);
+        alert.getDialogPane().setMaxHeight(200);
         alert.setHeaderText(null);
         alert.setContentText(string2);
         alert.show();
