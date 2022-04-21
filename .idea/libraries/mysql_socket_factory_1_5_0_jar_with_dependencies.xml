@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="mysql-socket-factory-1.5.0-jar-with-dependencies">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/main/resources/libraries/Important/mysql-socket-factory-1.5.0-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

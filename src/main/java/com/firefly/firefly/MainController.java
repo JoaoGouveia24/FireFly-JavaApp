@@ -12,7 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
@@ -56,7 +55,7 @@ public class MainController implements Initializable{
     //=======Media Player=======//
     private MediaPlayer mediaPlayer;
     private Media media;
-    private String Media_URL = "C:/Users/gouve/Dropbox/FireFlyDatabase/Music/on-my-own-ft-kid-cudi-official-audio.mp3";
+    private String Media_URL = "C:/Users/gouve/Desktop/the-hills-official-video.mp3";
     private Duration duration;
     //======Log Out Buttons=====//
     @FXML
