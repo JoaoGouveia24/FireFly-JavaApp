@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
+<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
    <children>
       <Pane prefHeight="815.0" prefWidth="200.0" style="-fx-background-color: #363636; -fx-background-radius: 25;">
          <children>
@@ -24,13 +24,13 @@
                   <JFXButton prefHeight="45.0" prefWidth="200.0" text="Playlists" textFill="#6acdd4" />
                </children>
             </VBox>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="25.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="139.0" fitWidth="170.0" layoutX="15.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/Logo1.png" />
+                  <Image url="@../../../images/Firefly_LOGO_2.png" />
                </image>
             </ImageView>
          </children></Pane>
-      <Pane layoutY="732.0" prefHeight="83.0" prefWidth="1200.0" style="-fx-background-color: #6acdd4;" />
+      <Pane layoutY="732.0" prefHeight="88.0" prefWidth="1200.0" style="-fx-background-color: #6acdd4;" />
       <JFXTextField focusColor="#6acdd4" layoutX="323.0" layoutY="56.0" prefHeight="26.0" prefWidth="592.0" promptText="Search..." style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
       <Pane layoutY="677.0" prefHeight="139.0" prefWidth="1200.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 40;">
          <children>

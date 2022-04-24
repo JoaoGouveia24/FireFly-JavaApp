@@ -64,9 +64,9 @@
       </JFXRadioButton>
       <Pane focusTraversable="true" layoutX="95.0" layoutY="85.0" prefHeight="540.0" prefWidth="278.0" style="-fx-background-color: #3d3d3d; -fx-background-radius: 25;">
          <children>
-            <ImageView fitHeight="411.0" fitWidth="558.0" layoutX="-65.0" layoutY="-101.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="129.0" fitWidth="174.0" layoutX="54.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/Logo_FirefliyV2.png" />
+                  <Image url="@../../../images/Firefly_LOGO_2.png" />
                </image>
             </ImageView>
             <JFXTextField id="LoginUser" fx:id="LoginUsername" focusColor="#7af4ff" labelFloat="true" layoutX="39.0" layoutY="194.0" prefHeight="34.0" prefWidth="202.0" promptText="Username" style="-fx-text-inner-color: white;" stylesheets="@Style.css" unFocusColor="WHITE" />
