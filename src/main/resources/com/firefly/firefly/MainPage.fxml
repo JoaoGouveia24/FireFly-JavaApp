@@ -6,6 +6,7 @@
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,25 +14,37 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
+<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
    <children>
       <Pane prefHeight="815.0" prefWidth="200.0" style="-fx-background-color: #363636; -fx-background-radius: 25;">
          <children>
-            <VBox layoutY="228.0" prefHeight="180.0" prefWidth="200.0">
-               <children>
-                  <JFXButton prefHeight="45.0" prefWidth="200.0" text="Profile" textFill="#6acdd4" />
-                  <JFXButton prefHeight="45.0" prefWidth="200.0" text="Favorites" textFill="#6acdd4" />
-                  <JFXButton prefHeight="45.0" prefWidth="200.0" text="Playlists" textFill="#6acdd4" />
-               </children>
-            </VBox>
-            <ImageView fitHeight="139.0" fitWidth="170.0" layoutX="15.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="96.0" fitWidth="121.0" layoutX="40.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/Firefly_LOGO_2.png" />
                </image>
             </ImageView>
+            <VBox layoutY="228.0" prefHeight="157.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="ProfileBtn2" prefHeight="45.0" prefWidth="200.0" text="Menu" textFill="#6acdd4">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="ProfileBtn" prefHeight="45.0" prefWidth="200.0" text="Profile" textFill="#6acdd4">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
+                  <JFXButton fx:id="ProfileBtn1" onAction="#UpldoadPage" prefHeight="45.0" prefWidth="200.0" text="Upload" textFill="#6acdd4">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </VBox>
          </children></Pane>
       <Pane layoutY="732.0" prefHeight="88.0" prefWidth="1200.0" style="-fx-background-color: #6acdd4;" />
-      <JFXTextField focusColor="#6acdd4" layoutX="323.0" layoutY="56.0" prefHeight="26.0" prefWidth="592.0" promptText="Search..." style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
+      <JFXTextField fx:id="SearchBar" focusColor="#6acdd4" layoutX="323.0" layoutY="56.0" prefHeight="26.0" prefWidth="592.0" promptText="Search..." style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
+      <ListView fx:id="listView" layoutX="322.0" layoutY="86.0" prefHeight="200.0" prefWidth="592.0" visible="false" />
       <Pane layoutY="677.0" prefHeight="139.0" prefWidth="1200.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 40;">
          <children>
             <Label fx:id="TimeRight" layoutX="851.0" layoutY="67.0" text="00:00" textFill="WHITE" />
@@ -93,11 +106,6 @@
             </ImageView>
             <JFXSlider id="Time" fx:id="TimeP" layoutX="351.0" layoutY="69.0" prefHeight="14.0" prefWidth="500.0" styleClass="Time" stylesheets="@Style.css" value="0.1" />
             <JFXSlider id="volumeId" fx:id="Volume" layoutX="531.0" layoutY="90.0" max="1.0" styleClass="volumeId" stylesheets="@Style.css" value="1.0" />
-            <ImageView fx:id="Tumb" fitHeight="170.0" fitWidth="170.0" layoutX="20.0" layoutY="-94.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../../../../../../../../Dropbox/FireFlyDatabase/Tumb/erys.jpg" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
       <Pane fx:id="root" layoutX="400.0" layoutY="14.0" opacity="0.0" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #363636; -fx-background-radius: 40;">

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.LoginController">
    <children>
       <ImageView fx:id="ContentImg" fitHeight="310.0" fitWidth="505.0" layoutX="685.0" layoutY="187.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -69,8 +69,8 @@
                   <Image url="@../../../images/Firefly_LOGO_2.png" />
                </image>
             </ImageView>
-            <JFXTextField id="LoginUser" fx:id="LoginUsername" focusColor="#7af4ff" labelFloat="true" layoutX="39.0" layoutY="194.0" prefHeight="34.0" prefWidth="202.0" promptText="Username" style="-fx-text-inner-color: white;" stylesheets="@Style.css" unFocusColor="WHITE" />
-            <JFXPasswordField id="LoginPass" fx:id="LoginPassword" focusColor="#7af4ff" labelFloat="true" layoutX="39.0" layoutY="270.0" prefHeight="34.0" prefWidth="202.0" promptText="Password" style="-fx-text-inner-color: white;" stylesheets="@Style.css" unFocusColor="WHITE" />
+            <JFXTextField id="LoginUser" fx:id="LoginUsername" focusColor="#7af4ff" labelFloat="true" layoutX="39.0" layoutY="194.0" prefHeight="34.0" prefWidth="202.0" promptText="Username" style="-fx-text-inner-color: white;" stylesheets="@Style.css" text="Admin" unFocusColor="WHITE" />
+            <JFXPasswordField id="LoginPass" fx:id="LoginPassword" focusColor="#7af4ff" labelFloat="true" layoutX="39.0" layoutY="270.0" prefHeight="34.0" prefWidth="202.0" promptText="Password" style="-fx-text-inner-color: white;" stylesheets="@Style.css" text="123456789" unFocusColor="WHITE" />
             <JFXButton fx:id="LoginBtn" defaultButton="true" layoutX="39.0" layoutY="390.0" onAction="#Login" prefHeight="25.0" prefWidth="202.0" style="-fx-background-color: #68cbd4; -fx-background-radius: 20;" text="Login">
                <cursor>
                   <Cursor fx:constant="HAND" />

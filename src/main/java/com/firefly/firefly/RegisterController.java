@@ -162,7 +162,7 @@ public class RegisterController {
     }
 
 
-    private void showAlert(Alert.AlertType error, String string, String string2) {
+    public void showAlert(Alert.AlertType error, String string, String string2) {
         Alert alert = new Alert(error);
         alert.setTitle(string);
         alert.getDialogPane().setMaxWidth(400);

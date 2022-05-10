@@ -11,6 +11,7 @@ module com.firefly.firefly {
     requires eu.hansolo.tilesfx;
     requires javafx.media;
     requires com.jfoenix;
+    requires com.google.common;
     requires java.sql;
 
 

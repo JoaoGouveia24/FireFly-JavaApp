@@ -1,5 +1,7 @@
 package com.firefly.firefly.Sql;
 
+import com.google.common.hash.Hashing;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.SQLException;
@@ -12,17 +14,6 @@ public class Utilizador extends DatabaseConnetion{
     private String email;
     private String password;
 
-    public static String sha256(String input) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
-            return java.util.Base64.getEncoder().encodeToString(hash);
-        }catch(Exception ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
-
     public Utilizador(String user ,String email, String pass) {
         super();
         this.username = user;
@@ -32,19 +23,37 @@ public class Utilizador extends DatabaseConnetion{
     }
 
     public boolean inserir(String user, String email, String pass) {
-        String query =("Insert into Conta(username, Email, Pass) Values('" + user + "','" + email + "','" + sha256(pass) + "');");
 
-        System.out.println("Query INSERIR -> " + query);
+        String HashedPass = Hashing.sha256().hashString(pass, StandardCharsets.UTF_8).toString();
+
+        String queryUser =("Insert into Conta(username, Email, Pass) Values('" + user + "','" + email + "','" + HashedPass + "');");
+
+        System.out.println("Query INSERIR -> " + queryUser);
 
         ligar();
         try {
-            getCon().createStatement().executeUpdate(query);
+            getCon().createStatement().executeUpdate(queryUser);
             return true;
         } catch (SQLException ex) {
             System.out.println("inserir()- ERRO- " + ex.getMessage());
             return false;
         }
     }
+
+    /*public boolean Search(String filter){
+
+        String querySearch = "SELECT Track_Name From Tracks;";
+
+
+        try{
+            getCon().createStatement().executeUpdate(querySearch);
+            return true;
+        }catch (SQLException ex){
+            System.out.println("inserir()- ERRO- "+ex.getMessage());
+            return false;
+        }
+    }*/
+
 
 }
 

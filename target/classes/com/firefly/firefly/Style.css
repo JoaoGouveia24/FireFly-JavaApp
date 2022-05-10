@@ -20,3 +20,7 @@
 .Time>.colored-track{
     -fx-background-color: linear-gradient(to right, #303030, #7104c9);
 }
+
+.UpLoadId{
+    -fx-background-color: linear-gradient(to left,  #6acdd4, #b251ff);
+}

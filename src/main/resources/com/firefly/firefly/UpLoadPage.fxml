@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ap" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.UploadScript">
+   <children>
+      <ImageView fitHeight="117.0" fitWidth="80.0" layoutX="560.0" layoutY="357.0" onMouseClicked="#ChoooseMediaFile" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/icons/upload.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <JFXButton layoutX="497.0" layoutY="485.0" prefHeight="41.0" prefWidth="207.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 20;" text="UPLOAD" textFill="#2e2e2e">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXTextField focusColor="WHITE" labelFloat="true" layoutX="458.0" layoutY="213.0" prefHeight="33.0" prefWidth="285.0" promptText="Music Name" unFocusColor="#6acdd4" />
+      <JFXComboBox fx:id="Album" focusColor="WHITE" labelFloat="true" layoutX="458.0" layoutY="280.0" prefHeight="33.0" prefWidth="224.0" promptText="Album" unFocusColor="#6acdd4" />
+      <ImageView fitHeight="50.0" fitWidth="40.0" layoutX="704.0" layoutY="277.0" onMouseClicked="#AlOpen" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/icons/add.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Pane fx:id="AlbumCreateP" layoutX="129.0" layoutY="114.0" prefHeight="522.0" prefWidth="943.0" style="-fx-background-radius: 30;" styleClass="UpLoadId" stylesheets="@Style.css" visible="false">
+         <children>
+            <Pane id="UpLoadId" layoutX="5.0" layoutY="4.0" prefHeight="514.0" prefWidth="933.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 30;">
+               <children>
+                  <JFXTextField fx:id="AlbumName" focusColor="WHITE" labelFloat="true" layoutX="360.0" layoutY="193.0" prefHeight="33.0" prefWidth="224.0" promptText="Album Name" style="-fx-text-inner-color: white;" unFocusColor="#6acdd4" />
+                  <ImageView fitHeight="107.0" fitWidth="149.0" layoutX="396.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/Firefly_LOGO_2.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton layoutX="360.0" layoutY="356.0" prefHeight="33.0" prefWidth="224.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 20;" text="CREATE">
+                     <font>
+                        <Font name="Impact" size="17.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXToggleButton fx:id="StatBtn" layoutX="351.0" layoutY="288.0" prefHeight="58.0" prefWidth="224.0" text="Private" textAlignment="JUSTIFY" textFill="WHITE" toggleColor="#6acdd4">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXToggleButton>
+                  <ImageView fitHeight="150.0" fitWidth="24.0" layoutX="887.0" layoutY="23.0" onMouseClicked="#AlClose" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/icons/x.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <JFXTextField fx:id="YearField" focusColor="WHITE" labelFloat="true" layoutX="396.0" layoutY="245.0" promptText="Year" style="-fx-text-inner-color: white;" unFocusColor="#6acdd4" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Label fx:id="FilePathLbl" layoutX="458.0" layoutY="459.0" prefHeight="17.0" prefWidth="285.0" textFill="#63ffe3" />
+      <ImageView fitHeight="150.0" fitWidth="50.0" layoutX="42.0" layoutY="40.0" onMouseClicked="#ReturnToMain" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/icons/back.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+   </children>
+</AnchorPane>

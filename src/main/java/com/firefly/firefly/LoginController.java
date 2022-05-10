@@ -1,18 +1,14 @@
 package com.firefly.firefly;
 
 import com.firefly.firefly.Sql.DatabaseConnetion;
+import com.google.common.hash.Hashing;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,13 +18,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ResourceBundle;
-
-import static com.firefly.firefly.Sql.Utilizador.sha256;
 
 
 public class LoginController extends DatabaseConnetion implements Initializable {
@@ -55,6 +49,9 @@ public class LoginController extends DatabaseConnetion implements Initializable 
     private JFXRadioButton Slider1;
     @FXML
     private JFXRadioButton Slider2;
+
+    //
+    public static int USER_SESSION_ID = 0;
 
     //Label
     @FXML
@@ -120,7 +117,7 @@ public class LoginController extends DatabaseConnetion implements Initializable 
 
 
         String usernameD = LoginUsername.getText();
-        String passwordD = sha256(LoginPassword.getText());
+        String passwordD = Hashing.sha256().hashString(LoginPassword.getText(), StandardCharsets.UTF_8).toString();
 
         ps.setString(1,usernameD);
         ps.setString(2,passwordD);
@@ -130,26 +127,34 @@ public class LoginController extends DatabaseConnetion implements Initializable 
 
         if (resultSet.next()){
 
+            //Stores the id
+            PreparedStatement id;
+            id = conectDB.prepareStatement("SELECT Conta_Id FROM Conta WHERE username=?");
+
+            id.setString(1, usernameD);
+            ResultSet IdForm = id.executeQuery();
+            while(IdForm.next()) {
+                USER_SESSION_ID = IdForm.getInt(1);
+                System.out.println(USER_SESSION_ID);
+            }
+
             Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
             Scene TableViewScene = new Scene(tableViewParent);
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(TableViewScene);
             window.show();
 
+
         }else {
             lb1.setVisible(true);
         }
-
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         /*
         img1.setOpacity(0);
         img2.setOpacity(0);
