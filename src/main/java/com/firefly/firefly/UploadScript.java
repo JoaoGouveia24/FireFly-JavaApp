@@ -92,17 +92,19 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
                 sta = false;
             }
             PreparedStatement Alb;
-            Alb = conectDB.prepareStatement("Insert into Album(Album_Name,Album_Year,State) values ('"+AlbumName.getText()+"','"+YearField+"','"+sta+"') INNER JOIN Conta ON Conta.Conta_Id = '"+USID+"'");
+            Alb = conectDB.prepareStatement("Insert into Album(Album_Name,Album_Year,State,User_Id) values ('"+AlbumName.getText()+"','"+YearField+"','"+sta+"','"+USID+"')");
             ResultSet resultSet = Alb.executeQuery();
 
             if (resultSet.next()){
-                R.showAlert(Alert.AlertType.CONFIRMATION, "Album", "Album criado com sucesso!");
+                R.showAlert(Alert.AlertType.CONFIRMATION, "Album", "Album created with success!");
+                AlbumCreateP.setVisible(false);
+            }else{
+                R.showAlert(Alert.AlertType.CONFIRMATION, "Album", "Ups something is wrong!");
             }
 
         } catch (SQLException e) {
             e.getMessage();
         }
-
     }
         /*RETURN
          * Confirmation lenght etc...!!!!

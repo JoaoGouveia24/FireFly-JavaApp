@@ -163,7 +163,11 @@ public class MainController extends DatabaseConnetion implements Initializable{
     }
     //Change scene to LoginFrame....
     public void Logout(ActionEvent event) throws IOException {
-        mediaPlayer.stop();
+        try {
+            mediaPlayer.stop();
+        }catch(NullPointerException null2){
+            System.out.println("Media is null - Not Critical");
+        }
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("LoginFrame.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -190,46 +194,49 @@ public class MainController extends DatabaseConnetion implements Initializable{
 
 
         //SearchBar...
-       // listView.getItems().addAll(words);
-        if(media!=null){
-            mediaPlayer = new MediaPlayer(new Media(Music.toString()));
-            mediaPlayer.setVolume(100);
-            mediaPlayer.volumeProperty().bindBidirectional(Volume.valueProperty());
-        }
+        // listView.getItems().addAll(words);
+        try {
+            if (media!=null) {
+                mediaPlayer = new MediaPlayer(new Media(Music.toString()));
+                mediaPlayer.setVolume(100);
+                mediaPlayer.volumeProperty().bindBidirectional(Volume.valueProperty());
+            }
 
-
-        Platform.runLater(() -> {
-
-            Volume.valueProperty().addListener(ov -> {
-                if(Volume.isValueChanging()) {
-                    mediaPlayer.setVolume(Volume.getValue());
-                }
-            });
-            mediaPlayer.currentCountProperty().addListener(ov -> {
-                duration = mediaPlayer.getMedia().getDuration();
-                actvalores();
-            });
-            TimeP.valueProperty().addListener(ov -> {
-                if(TimeP.isPressed()) {
-                    mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(TimeP.getValue()/100));
-                }
-            });
-        });
-    }
-
-    //Responsible to stop the Threads running...
-    public void stop() {
-        Platform.exit();
-    }
-
-    //actvalores refreshs the values on the current media slider...
-    public void actvalores() {
-        if(TimeP != null) {
             Platform.runLater(() -> {
-                if(!TimeP.isDisable() && duration.greaterThan(Duration.ZERO) && !TimeP.isValueChanging()){
-                    TimeP.setValue(mediaPlayer.getCurrentTime().divide(duration.toMillis()).toMillis()*100.0);
-                }
+
+                Volume.valueProperty().addListener(ov -> {
+                    if (Volume.isValueChanging()) {
+                        mediaPlayer.setVolume(Volume.getValue());
+                    }
+                });
+                mediaPlayer.currentCountProperty().addListener(ov -> {
+                    duration = mediaPlayer.getMedia().getDuration();
+                    actvalores();
+                });
+                TimeP.valueProperty().addListener(ov -> {
+                    if (TimeP.isPressed()) {
+                        mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(TimeP.getValue() / 100));
+                    }
+                });
             });
+        }catch (NullPointerException nullMed){
+            System.out.println("Media is null - Not Critical");
         }
     }
-}
+
+        //Responsible to stop the Threads running...
+        public void stop () {
+            Platform.exit();
+        }
+
+        //actvalores refreshs the values on the current media slider...
+        public void actvalores () {
+            if (TimeP != null) {
+                Platform.runLater(() -> {
+                    if (!TimeP.isDisable() && duration.greaterThan(Duration.ZERO) && !TimeP.isValueChanging()) {
+                        TimeP.setValue(mediaPlayer.getCurrentTime().divide(duration.toMillis()).toMillis() * 100.0);
+                    }
+                });
+            }
+        }
+    }

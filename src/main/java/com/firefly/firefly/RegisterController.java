@@ -170,7 +170,6 @@ public class RegisterController {
         alert.setHeaderText(null);
         alert.setContentText(string2);
         alert.show();
-
     }
 
     //Change to Login Page!
@@ -181,5 +180,4 @@ public class RegisterController {
         window.setScene(TableViewScene);
         window.show();
     }
-
 }

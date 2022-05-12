@@ -50,7 +50,7 @@
                         <Image url="@../../../images/Firefly_LOGO_2.png" />
                      </image>
                   </ImageView>
-                  <JFXButton layoutX="360.0" layoutY="356.0" prefHeight="33.0" prefWidth="224.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 20;" text="CREATE">
+                  <JFXButton layoutX="360.0" layoutY="356.0" onAction="#AlbumCreationMet" prefHeight="33.0" prefWidth="224.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 20;" text="CREATE">
                      <font>
                         <Font name="Impact" size="17.0" />
                      </font>
@@ -77,13 +77,17 @@
          </children>
       </Pane>
       <Label fx:id="FilePathLbl" layoutX="458.0" layoutY="459.0" prefHeight="17.0" prefWidth="285.0" textFill="#63ffe3" />
-      <ImageView fitHeight="150.0" fitWidth="50.0" layoutX="42.0" layoutY="40.0" onMouseClicked="#ReturnToMain" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../images/icons/back.png" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
+      <JFXButton layoutX="28.0" layoutY="26.0" minHeight="-Infinity" minWidth="-Infinity" onAction="#ReturnToMain" prefHeight="50.0" prefWidth="50.0">
+         <graphic>
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/icons/back.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>
