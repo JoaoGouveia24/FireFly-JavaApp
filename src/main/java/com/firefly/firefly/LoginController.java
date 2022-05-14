@@ -104,7 +104,6 @@ public class LoginController extends DatabaseConnetion implements Initializable 
 
     public void Login (ActionEvent event){
 
-
         try{
 
         DatabaseConnetion connetion = new DatabaseConnetion();

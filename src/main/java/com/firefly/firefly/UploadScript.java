@@ -2,10 +2,7 @@ package com.firefly.firefly;
 
 import com.firefly.firefly.Sql.DatabaseConnetion;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXToggleButton;
-import javafx.beans.Observable;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,7 +16,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -41,9 +37,6 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
     private JFXTextField YearField;
     @FXML
     private JFXTextField AlbumName;
-    @FXML
-    private JFXToggleButton StatBtn;
-    private boolean sta;
     //
     private String UploadFilePath;
 
@@ -51,11 +44,11 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
     private File file;
     private FileChooser chooser;
     private String FilePath = null;
-    private Window window;
-
+    private int Year;
     RegisterController R = new RegisterController();
-
     public static int USID;
+
+
 
     @FXML
     void AlOpen(){
@@ -80,36 +73,42 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
 
 
     @FXML
-    void AlbumCreationMet() {
+    public void AlbumCreationMet() {
+
         try {
+            Year = Integer.parseInt(YearField.getText());
+            String ALbName = AlbumName.getText();
+
+            System.out.println("temp 1");
+
             DatabaseConnetion connetion = new DatabaseConnetion();
             connetion.ligar();
             Connection conectDB = connetion.getCon();
 
-            if (StatBtn.isSelected()){
-                sta = true;
-            }else{
-                sta = false;
-            }
-            PreparedStatement Alb;
-            Alb = conectDB.prepareStatement("Insert into Album(Album_Name,Album_Year,State,User_Id) values ('"+AlbumName.getText()+"','"+YearField+"','"+sta+"','"+USID+"')");
-            ResultSet resultSet = Alb.executeQuery();
+            System.out.println("temp 2");
+            System.out.println(ALbName);
+            System.out.println(Year);
+            System.out.println(USID);
 
-            if (resultSet.next()){
-                R.showAlert(Alert.AlertType.CONFIRMATION, "Album", "Album created with success!");
-                AlbumCreateP.setVisible(false);
-            }else{
-                R.showAlert(Alert.AlertType.CONFIRMATION, "Album", "Ups something is wrong!");
-            }
+            String Ins = "Insert into Album(Album_Name,Album_Year,User_Id) values ('" +ALbName+"','" +Year+"','" +USID+"')";
+
+            System.out.println("temp 3");
+
+            conectDB.createStatement().executeUpdate(Ins);
+
+                System.out.println("temp 4");
+                    AlbumCreateP.setVisible(false);
+                    R.showAlert(Alert.AlertType.CONFIRMATION, "Album", "Album created with success!");
 
         } catch (SQLException e) {
-            e.getMessage();
+            e.printStackTrace();
+            R.showAlert(Alert.AlertType.CONFIRMATION, "Album", "Ups something is wrong!");
         }
     }
         /*RETURN
          * Confirmation lenght etc...!!!!
          * Create Musics statement etc..
-         * */
+         */
 
     @FXML
     void ReturnToMain(ActionEvent event) throws IOException {
@@ -121,14 +120,16 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
         window.show();
     }
 
-
         @Override
         public void initialize (URL url, ResourceBundle resourceBundle) {
 
+            LoginController IDLogin = new LoginController();
+            USID = IDLogin.USER_SESSION_ID;
+
+            System.out.println(USID);
+
             AlbumCreateP.setVisible(false);
 
-            MainController main = new MainController();
-            USID = main.SSID;
         }
 
 }

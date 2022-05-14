@@ -39,21 +39,5 @@ public class Utilizador extends DatabaseConnetion{
             return false;
         }
     }
-
-    /*public boolean Search(String filter){
-
-        String querySearch = "SELECT Track_Name From Tracks;";
-
-
-        try{
-            getCon().createStatement().executeUpdate(querySearch);
-            return true;
-        }catch (SQLException ex){
-            System.out.println("inserir()- ERRO- "+ex.getMessage());
-            return false;
-        }
-    }*/
-
-
 }
 
