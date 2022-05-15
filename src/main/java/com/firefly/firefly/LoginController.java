@@ -52,7 +52,7 @@ public class LoginController extends DatabaseConnetion implements Initializable 
 
     //
     public static int USER_SESSION_ID = 0;
-
+    public static String usernameD;
     //Label
     @FXML
     private Label lb1;
@@ -115,7 +115,7 @@ public class LoginController extends DatabaseConnetion implements Initializable 
         ps = conectDB.prepareStatement("SELECT * FROM Conta WHERE username=? && Pass=?");
 
 
-        String usernameD = LoginUsername.getText();
+        usernameD = LoginUsername.getText();
         String passwordD = Hashing.sha256().hashString(LoginPassword.getText(), StandardCharsets.UTF_8).toString();
 
         ps.setString(1,usernameD);

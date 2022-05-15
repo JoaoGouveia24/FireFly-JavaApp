@@ -1,14 +1,15 @@
 package com.firefly.firefly;
 
 
-import com.firefly.firefly.SESSION.Session_Class;
 import com.firefly.firefly.Sql.DatabaseConnetion;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
-import eu.hansolo.tilesfx.tools.ImageParticle;
 import javafx.animation.*;
+import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,18 +23,20 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.*;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 
 //===========================================================================//
 //==============================Main Class===================================//
@@ -53,8 +56,6 @@ public class MainController extends DatabaseConnetion implements Initializable{
     @FXML
     private ImageView PlayImg;
     @FXML
-    private Label TimeRight;
-    @FXML
     private ImageView Forward;
     @FXML
     private ImageView Replay;
@@ -63,10 +64,13 @@ public class MainController extends DatabaseConnetion implements Initializable{
     @FXML
     private ImageView Tumb;
     //=======Media Player=======//
+    private URI NullController = URI.create("C:/Users/gouve/Desktop/FireFly/FireFlyPAP/src/main/resources/NullControl.mp3");
     private MediaPlayer mediaPlayer;
     private Media media;
     private Duration duration;
-    private String Music ="C:/Users/gouve/OneDrive/Ambiente de Trabalho/mii.mp3";
+    private String Music = "";
+    @FXML
+    private JFXButton MainButton;
     //======Log Out Buttons=====//
     @FXML
     private ImageView Log1;
@@ -75,16 +79,17 @@ public class MainController extends DatabaseConnetion implements Initializable{
     //======MenuButtons========//
     @FXML
     private JFXButton ProfileBtn;
-    @FXML
-    private JFXButton FavoritesBtn;
     //=====SearchBar=========//
     @FXML
     private ListView<String> listView;
     @FXML
     private JFXTextField SearchBar;
-    public ArrayList<String> words;
+    ObservableList data = FXCollections.observableArrayList();
+    @FXML
+    private Label well;
     //==========================================//
     public static int SSID;
+    DatabaseConnetion connetion = new DatabaseConnetion();
 
 
     //===========================================================================//
@@ -92,26 +97,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
     //===========================================================================//
 
 
-    @FXML
-    void search(ActionEvent event){
-        listView.getItems().clear();
-        listView.getItems().addAll(searchList(SearchBar.getText(), words));
-    }
-
-    void DatabaseMusic(){
-
-    }
-
-    private List<String> searchList(String searchWords, List<String> listOfStrings){
-
-        List<String> searchWordsArray = Arrays.asList(searchWords.trim().split(""));
-
-        return  listOfStrings.stream().filter(input ->{
-            return searchWordsArray.stream().allMatch(word ->
-                    input.toLowerCase().contains(word.toLowerCase()));
-        }).collect(Collectors.toList());
-    }
-
+       //---------------------------------------------------
 
     public void PlayMusic(){
             if (mediaPlayer.getStatus() != MediaPlayer.Status.PLAYING) {
@@ -140,7 +126,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
 
     //Methods to start the logout animation panel...
     public void LogOut() {
-
+        root.setDisable(false);
         root.setVisible(true);
 
         TranslateTransition transition = new TranslateTransition();
@@ -153,7 +139,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
     }
     public void noth() {
         root.setVisible(false);
-
+        root.setDisable(true);
         TranslateTransition transition = new TranslateTransition();
         transition.setDuration(Duration.seconds(2));
         transition.setToY(0);
@@ -183,6 +169,50 @@ public class MainController extends DatabaseConnetion implements Initializable{
         window.show();
     }
 
+    //Search bar
+    @FXML
+    public void searchS (){
+
+       connetion.ligar();
+       Connection conectDB = connetion.getCon();
+
+        try {
+            PreparedStatement pr;
+            pr = conectDB.prepareStatement("SELECT Track_Name,Track_Id from Tracks WHERE Track_Name like ?");
+            pr.setString(1,"%"+SearchBar.getText()+"%");
+            ResultSet rs = pr.executeQuery();
+            //
+            while(rs.next()){
+
+                String Track = rs.getString(1);
+                data.add(Track);
+            }
+            rs.close();
+            pr.close();
+            listView.setItems(data);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    void RetrieveData() throws SQLException, IOException {
+
+        connetion.ligar();
+        Connection conectDB = connetion.getCon();
+        PreparedStatement Load;
+
+        Load = conectDB.prepareStatement("SELECT Track_Bin FROM Tracks where Track_Name = ?");
+        Load.setString(1, listView.getSelectionModel().getSelectedItem());
+        ResultSet rs = Load.executeQuery();
+
+
+            InputStream is = rs.getBinaryStream(1);
+            File targetFile = new File("NullControl.mp3");
+            FileUtils.copyInputStreamToFile(is, targetFile);
+
+            mediaPlayer = new MediaPlayer(new Media("NullControl.mp3"));
+            mediaPlayer.play();
+    }
 
     //Methods to
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -191,16 +221,33 @@ public class MainController extends DatabaseConnetion implements Initializable{
         SSID = IDLogin.USER_SESSION_ID;
         //check->
         System.out.println(SSID);
+        MainButton.setDisable(true);
+        listView.setVisible(false);
+        root.setDisable(true);
 
+        SearchBar.textProperty().addListener(txt ->{
+            int check = SearchBar.getLength();
+            if (check == 0){
+                data.clear();
+                listView.setVisible(false);
+            }else{listView.setVisible(true);}
+        });
 
-        //SearchBar...
-        // listView.getItems().addAll(words);
         try {
-            if (media!=null) {
-                mediaPlayer = new MediaPlayer(new Media(Music.toString()));
+                mediaPlayer = new MediaPlayer(new Media(NullController.toURL().toExternalForm()));
                 mediaPlayer.setVolume(100);
                 mediaPlayer.volumeProperty().bindBidirectional(Volume.valueProperty());
-            }
+
+
+                listView.getSelectionModel().selectedItemProperty().addListener(xi ->{
+                    try {
+                        RetrieveData();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
 
             Platform.runLater(() -> {
 
@@ -219,7 +266,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
                     }
                 });
             });
-        }catch (NullPointerException nullMed){
+        }catch (NullPointerException | MalformedURLException nullMed){
             System.out.println("Media is null - Not Critical");
         }
     }

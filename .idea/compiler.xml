@@ -11,4 +11,9 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="FireFlyPAP" options="--add-exports org.objectweb.asm.commons/com.google.common.hash=com.firefly.firefly" />
+    </option>
+  </component>
 </project>

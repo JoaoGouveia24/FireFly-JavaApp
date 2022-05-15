@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.UploadScript">
+<AnchorPane fx:id="ap" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.UploadScript">
    <children>
       <ImageView fitHeight="117.0" fitWidth="80.0" layoutX="560.0" layoutY="357.0" onMouseClicked="#ChoooseMediaFile" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -21,7 +21,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <JFXButton layoutX="497.0" layoutY="485.0" prefHeight="41.0" prefWidth="207.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 20;" text="UPLOAD" textFill="#2e2e2e">
+      <JFXButton layoutX="497.0" layoutY="485.0" onAction="#UpLoadM" prefHeight="41.0" prefWidth="207.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 20;" text="UPLOAD" textFill="#2e2e2e">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
@@ -29,8 +29,8 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTextField focusColor="WHITE" labelFloat="true" layoutX="458.0" layoutY="213.0" prefHeight="33.0" prefWidth="285.0" promptText="Music Name" unFocusColor="#6acdd4" />
-      <JFXComboBox fx:id="Album" focusColor="WHITE" labelFloat="true" layoutX="458.0" layoutY="280.0" prefHeight="33.0" prefWidth="224.0" promptText="Album" unFocusColor="#6acdd4" />
+      <JFXTextField fx:id="MusicName" focusColor="WHITE" labelFloat="true" layoutX="458.0" layoutY="213.0" prefHeight="33.0" prefWidth="285.0" promptText="Music Name" style="-fx-text-inner-color: white;" unFocusColor="#6acdd4" />
+      <JFXComboBox id="combo-box " fx:id="Album" focusColor="WHITE" labelFloat="true" layoutX="458.0" layoutY="280.0" prefHeight="33.0" prefWidth="224.0" promptText="Album" styleClass="combo-box" stylesheets="@Style.css" unFocusColor="#6acdd4" />
       <ImageView fitHeight="50.0" fitWidth="40.0" layoutX="704.0" layoutY="277.0" onMouseClicked="#AlOpen" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/icons/add.png" />
@@ -83,5 +83,13 @@
             </ImageView>
          </graphic>
       </JFXButton>
+      <ImageView fitHeight="150.0" fitWidth="30.0" layoutX="97.0" layoutY="35.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/icons/refresh.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>

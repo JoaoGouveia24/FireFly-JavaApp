@@ -1,8 +1,13 @@
 package com.firefly.firefly;
 
 import com.firefly.firefly.Sql.DatabaseConnetion;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,14 +20,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.Window;
+
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class UploadScript extends DatabaseConnetion implements Initializable {
@@ -37,8 +41,13 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
     private JFXTextField YearField;
     @FXML
     private JFXTextField AlbumName;
+    @FXML
+    JFXComboBox Album;
+    @FXML
+    private JFXTextField MusicName;
     //
-    private String UploadFilePath;
+    String UploadFilePath;
+    String AlbName;
 
     //File chooser--->
     private File file;
@@ -46,8 +55,9 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
     private String FilePath = null;
     private int Year;
     RegisterController R = new RegisterController();
+    public String AlFinal;
     public static int USID;
-
+    public static  int AID;
 
 
     @FXML
@@ -68,7 +78,8 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
         Stage stage = (Stage)ap.getScene().getWindow();
         file = chooser.showOpenDialog(stage);
 
-        if(file != null){FilePathLbl.setText(file.getAbsolutePath()+" - Selected"); UploadFilePath = file.getAbsolutePath();}
+        if(file != null){FilePathLbl.setText(file.getAbsolutePath()+" - Selected");
+            UploadFilePath = file.getAbsolutePath();}
     }
 
 
@@ -90,7 +101,7 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
             System.out.println(Year);
             System.out.println(USID);
 
-            String Ins = "Insert into Album(Album_Name,Album_Year,User_Id) values ('" +ALbName+"','" +Year+"','" +USID+"')";
+            String Ins = "Insert into Album(Album_Name,Album_Year,User_Id) values ('"+ALbName+"','"+Year+"','"+USID+"')";
 
             System.out.println("temp 3");
 
@@ -105,10 +116,84 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
             R.showAlert(Alert.AlertType.CONFIRMATION, "Album", "Ups something is wrong!");
         }
     }
-        /*RETURN
+
+         /*RETURN
          * Confirmation lenght etc...!!!!
          * Create Musics statement etc..
          */
+
+    @FXML
+    void refresh(){
+        try{
+            DatabaseConnetion connetion = new DatabaseConnetion();
+            connetion.ligar();
+            Connection conectDB = connetion.getCon();
+
+            PreparedStatement ps;
+
+            ps = conectDB.prepareStatement("SELECT Album_Name FROM Album WHERE User_Id =?");
+            ps.setString(1, String.valueOf(USID));
+
+            ResultSet resultSet = ps.executeQuery();
+            ObservableList data = FXCollections.observableArrayList();
+            while (resultSet.next()){
+                data.add((resultSet.getString(1)));
+            }
+            Album.setItems(data);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void UpLoadM(){
+
+        System.out.println(AlFinal);
+
+        try {
+            DatabaseConnetion connetion = new DatabaseConnetion();
+            connetion.ligar();
+            Connection conectDB = connetion.getCon();
+
+            PreparedStatement ps;
+            ps = conectDB.prepareStatement("SELECT Album_Id FROM Album WHERE Album_Name =?");
+            ps.setString(1, AlFinal);
+
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                AID = resultSet.getInt(1);
+            }
+
+            if (file == null && Album == null) {
+                refresh();
+                R.showAlert(Alert.AlertType.CONFIRMATION, "Upload", "You must choose one song to upload!");
+            }else if (MusicName == null){
+                R.showAlert(Alert.AlertType.CONFIRMATION, "Upload", "You must choose a name for the song!");
+            }else {
+
+                PreparedStatement Ins;
+                Ins = conectDB.prepareStatement("Insert into Tracks(Track_Name,Track_Bin,Album_Id) values (?,?,?)");
+                Ins.setString(1,MusicName.getText());
+                //
+                Blob blob = conectDB.createBlob();
+                ObjectOutputStream oos;
+                oos = new ObjectOutputStream(blob.setBinaryStream(1));
+                oos.writeObject(file);
+                oos.close();
+                Ins.setBlob(2, blob);
+                blob.free();
+                //
+                Ins.setString(3, String.valueOf(AID));
+                Ins.executeUpdate();
+                Ins.close();
+
+                R.showAlert(Alert.AlertType.CONFIRMATION, "UpLoad", "UpLoad with success!");
+                MusicName.setText("");
+            }
+
+        }catch (Exception e){e.printStackTrace();}
+    }
 
     @FXML
     void ReturnToMain(ActionEvent event) throws IOException {
@@ -125,12 +210,36 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
 
             LoginController IDLogin = new LoginController();
             USID = IDLogin.USER_SESSION_ID;
-
             System.out.println(USID);
-
             AlbumCreateP.setVisible(false);
 
+            try {
+                DatabaseConnetion connetion = new DatabaseConnetion();
+                connetion.ligar();
+                Connection conectDB = connetion.getCon();
+
+                PreparedStatement ps;
+
+                ps = conectDB.prepareStatement("SELECT Album_Name FROM Album WHERE User_Id =?");
+                ps.setString(1, String.valueOf(USID));
+
+                ResultSet resultSet = ps.executeQuery();
+                ObservableList data = FXCollections.observableArrayList();
+                while (resultSet.next()){
+                    data.add((resultSet.getString(1)));
+                }
+                Album.setItems(data);
+
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+
+            try {
+                Platform.runLater(() -> {
+                    Album.valueProperty().addListener(op -> {
+                        AlFinal = String.valueOf(Album.getValue());
+                    });
+                });
+            }catch (Exception e){e.printStackTrace();}
         }
-
 }
-

@@ -24,3 +24,13 @@
 .UpLoadId{
     -fx-background-color: linear-gradient(to left,  #6acdd4, #b251ff);
 }
+
+.combo-box .cell:selected {
+    -fx-text-fill: white;
+}
+
+.list-cell:even { /* <=== changed to even */
+    -fx-background-color: #303030;
+    -fx-text-fill: #6acdd4;
+    -fx-background-radius: 25;
+}

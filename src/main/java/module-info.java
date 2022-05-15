@@ -12,6 +12,7 @@ module com.firefly.firefly {
     requires javafx.media;
     requires com.jfoenix;
     requires com.google.common;
+    requires org.apache.commons.io;
     requires java.sql;
 
 
