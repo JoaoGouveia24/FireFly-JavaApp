@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.ProfileController">
+   <children>
+      <Pane layoutX="294.0" layoutY="111.0" prefHeight="528.0" prefWidth="612.0" style="-fx-background-color: #fff; -fx-background-radius: 50;">
+         <children>
+            <JFXListView fx:id="ListviewAlb" layoutX="416.0" layoutY="75.0" prefHeight="400.0" prefWidth="194.0" style="-fx-background-color: #fff;" styleClass="list-cell" stylesheets="@Style.css" />
+            <Pane prefHeight="528.0" prefWidth="413.0" style="-fx-background-color: #68cbd4; -fx-background-radius: 50;">
+               <children>
+                  <JFXTextField fx:id="Username" editable="false" focusColor="WHITE" labelFloat="true" layoutX="108.0" layoutY="212.0" prefHeight="25.0" prefWidth="200.0" promptText="Username" />
+                  <JFXTextField fx:id="Email" editable="false" focusColor="WHITE" labelFloat="true" layoutX="108.0" layoutY="265.0" prefHeight="25.0" prefWidth="200.0" promptText="Email" />
+                  <ImageView fitHeight="95.0" fitWidth="145.0" layoutX="144.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/Firefly_LOGO_2.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton fx:id="Save" layoutX="106.0" layoutY="369.0" onAction="#Save" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 25;" text="Save" visible="false">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <Label layoutX="161.0" layoutY="483.0" prefHeight="17.0" prefWidth="93.0" text="Copyright©2022">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="Edit" layoutX="106.0" layoutY="369.0" onAction="#Edit" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 25;" text="Edit">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <Label layoutX="464.0" layoutY="41.0" prefHeight="17.0" prefWidth="93.0" text="ALBUNS">
+               <font>
+                  <Font name="Arial Black" size="16.0" />
+               </font>
+            </Label>
+            <Pane fx:id="Ok" layoutX="43.0" layoutY="164.0" prefHeight="188.0" prefWidth="526.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 50;" visible="false">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="64.0" layoutX="60.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/icons/check.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="221.0" layoutY="84.0" text="Account Updated with success!" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="13.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="20.0" layoutX="478.0" layoutY="25.0" onMouseClicked="#Close" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/icons/x.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="NotOk" layoutX="43.0" layoutY="164.0" prefHeight="188.0" prefWidth="526.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 50;" visible="false">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="64.0" layoutX="60.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/icons/bad-mood.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="221.0" layoutY="84.0" text="Something is wrong!" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="13.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="20.0" layoutX="478.0" layoutY="25.0" onMouseClicked="#Close" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/icons/x.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane fx:id="PassCheck" layoutX="53.0" layoutY="164.0" prefHeight="188.0" prefWidth="526.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 50;" visible="false">
+               <children>
+                  <Label layoutX="49.0" layoutY="25.0" text="Password Comfirmation:" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Black" size="13.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="150.0" fitWidth="20.0" layoutX="478.0" layoutY="25.0" onMouseClicked="#Close" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/icons/x.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <JFXPasswordField fx:id="password" focusColor="WHITE" layoutX="155.0" layoutY="82.0" prefHeight="25.0" prefWidth="216.0" promptText="Password" style="-fx-text-inner-color: white;" unFocusColor="#68cbd4" />
+                  <JFXButton layoutX="155.0" layoutY="136.0" onAction="#PassCheckDatabase" prefHeight="25.0" prefWidth="216.0" style="-fx-background-color: #68cbd4; -fx-background-radius: 20;" text="OK">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane layoutX="890.0" layoutY="111.0" prefHeight="102.0" prefWidth="238.0" style="-fx-background-color: #68cbd4; -fx-background-radius: 50;">
+         <children>
+            <JFXButton layoutX="32.0" layoutY="56.0" prefHeight="32.0" prefWidth="174.0" style="-fx-background-color: #ffff; -fx-background-radius: 25;" text="Delete" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="76.0" layoutY="14.0" prefHeight="17.0" prefWidth="86.0" textAlignment="JUSTIFY" textOverrun="CLIP" wrapText="true" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

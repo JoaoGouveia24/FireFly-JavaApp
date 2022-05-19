@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,13 +19,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import org.apache.commons.io.FileUtils;
 
@@ -90,6 +94,8 @@ public class MainController extends DatabaseConnetion implements Initializable{
     //==========================================//
     public static int SSID;
     DatabaseConnetion connetion = new DatabaseConnetion();
+    public String OLD = "";
+    public int Cont;
 
 
     //===========================================================================//
@@ -168,8 +174,17 @@ public class MainController extends DatabaseConnetion implements Initializable{
         window.setScene(TableViewScene);
         window.show();
     }
+    public void ProfilePage(ActionEvent event) throws IOException {
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("ProfileFrame.fxml"));
+        Scene TableViewScene = new Scene(tableViewParent);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(TableViewScene);
+        window.show();
+    }
 
     //Search bar
+
+    //Work here !Important
     @FXML
     public void searchS (){
 
@@ -183,19 +198,28 @@ public class MainController extends DatabaseConnetion implements Initializable{
             ResultSet rs = pr.executeQuery();
             //
             while(rs.next()){
-
                 String Track = rs.getString(1);
                 data.add(Track);
+
             }
+            data.remove(1);
+
             rs.close();
             pr.close();
             listView.setItems(data);
         }catch (SQLException e){
-            e.printStackTrace();
+            System.out.println("");
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("");
+        }catch(RuntimeException e){
+            System.out.println("");
         }
     }
 
+    //Work here !Important
     void RetrieveData() throws SQLException, IOException {
+
+        System.out.println("Retrieve Data Starts - 01");
 
         connetion.ligar();
         Connection conectDB = connetion.getCon();
@@ -205,12 +229,12 @@ public class MainController extends DatabaseConnetion implements Initializable{
         Load.setString(1, listView.getSelectionModel().getSelectedItem());
         ResultSet rs = Load.executeQuery();
 
-
             InputStream is = rs.getBinaryStream(1);
-            File targetFile = new File("NullControl.mp3");
+            File targetFile = new File("C:/Users/gouve/OneDrive/Documentos/Development/GitHub/FireFlyPAP/src/main/java/com/firefly/firefly/NullControl.mp3");
             FileUtils.copyInputStreamToFile(is, targetFile);
 
-            mediaPlayer = new MediaPlayer(new Media("NullControl.mp3"));
+            MainButton.setDisable(false);
+            mediaPlayer = new MediaPlayer(new Media("C:/Users/gouve/OneDrive/Documentos/Development/GitHub/FireFlyPAP/src/main/java/com/firefly/firefly/NullControl.mp3"));
             mediaPlayer.play();
     }
 
@@ -239,7 +263,9 @@ public class MainController extends DatabaseConnetion implements Initializable{
                 mediaPlayer.volumeProperty().bindBidirectional(Volume.valueProperty());
 
 
-                listView.getSelectionModel().selectedItemProperty().addListener(xi ->{
+            listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+                @Override
+                public ListCell<String> call(ListView<String> stringListView) {
                     try {
                         RetrieveData();
                     } catch (SQLException e) {
@@ -247,7 +273,9 @@ public class MainController extends DatabaseConnetion implements Initializable{
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                });
+                    return null;
+                }
+            });
 
             Platform.runLater(() -> {
 

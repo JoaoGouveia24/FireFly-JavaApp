@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
+<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
    <children>
       <Pane prefHeight="815.0" prefWidth="200.0" style="-fx-background-color: #363636; -fx-background-radius: 25;">
          <children>
@@ -25,12 +25,7 @@
             </ImageView>
             <VBox layoutY="228.0" prefHeight="157.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="ProfileBtn2" prefHeight="45.0" prefWidth="200.0" text="Menu" textFill="#6acdd4">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </JFXButton>
-                  <JFXButton fx:id="ProfileBtn" prefHeight="45.0" prefWidth="200.0" text="Profile" textFill="#6acdd4">
+                  <JFXButton fx:id="ProfileBtn" onAction="#ProfilePage" prefHeight="45.0" prefWidth="200.0" text="Profile" textFill="#6acdd4">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXButton>

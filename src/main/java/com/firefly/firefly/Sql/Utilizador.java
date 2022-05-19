@@ -22,6 +22,7 @@ public class Utilizador extends DatabaseConnetion{
         ligar();
     }
 
+
     public boolean inserir(String user, String email, String pass) {
 
         String HashedPass = Hashing.sha256().hashString(pass, StandardCharsets.UTF_8).toString();
