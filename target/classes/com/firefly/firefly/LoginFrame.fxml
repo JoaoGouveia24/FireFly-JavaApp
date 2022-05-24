@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.LoginController">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1265.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/Login/LoginFundo.png" />
          </image>
       </ImageView>
-      <Pane focusTraversable="true" layoutX="95.0" layoutY="85.0" prefHeight="540.0" prefWidth="278.0" style="-fx-background-color: #3d3d3d; -fx-background-radius: 25;">
+      <Pane focusTraversable="true" layoutX="95.0" layoutY="85.0" prefHeight="540.0" prefWidth="278.0" style="-fx-background-color: #3d3d3d; -fx-background-radius: 40;">
          <children>
-            <ImageView fitHeight="129.0" fitWidth="174.0" layoutX="54.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="129.0" fitWidth="146.0" layoutX="67.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/Firefly_LOGO_2.png" />
                </image>
@@ -41,5 +41,13 @@
             <JFXTextField fx:id="PassSee" layoutX="39.0" layoutY="270.0" prefHeight="34.0" prefWidth="202.0" visible="false" />
          </children>
       </Pane>
+      <ImageView fitHeight="42.0" fitWidth="20.0" layoutX="1159.0" layoutY="21.0" onMouseClicked="#Quit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/icons/x.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
    </children>
 </AnchorPane>

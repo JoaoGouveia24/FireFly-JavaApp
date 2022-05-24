@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -101,7 +102,7 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
             System.out.println(Year);
             System.out.println(USID);
 
-            String Ins = "Insert into Album(Album_Name,Album_Year,Conta_Id) values ('"+ALbName+"','"+Year+"','"+USID+"')";
+            String Ins = "Insert into Album(Album_Name,Album_Year,User_Id) values ('"+ALbName+"','"+Year+"','"+USID+"')";
 
             System.out.println("temp 3");
 
@@ -131,7 +132,7 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
 
             PreparedStatement ps;
 
-            ps = conectDB.prepareStatement("SELECT Album_Name FROM Album WHERE Conta_Id =?");
+            ps = conectDB.prepareStatement("SELECT Album_Name FROM Album WHERE User_Id =?");
             ps.setString(1, String.valueOf(USID));
 
             ResultSet resultSet = ps.executeQuery();
@@ -192,6 +193,7 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
 
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
+        TableViewScene.setFill(Color.TRANSPARENT);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(TableViewScene);
         window.show();
@@ -212,7 +214,7 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
 
                 PreparedStatement ps;
 
-                ps = conectDB.prepareStatement("SELECT Album_Name FROM Album WHERE Conta_Id =?");
+                ps = conectDB.prepareStatement("SELECT Album_Name FROM Album WHERE User_Id =?");
                 ps.setString(1, String.valueOf(USID));
 
                 ResultSet resultSet = ps.executeQuery();

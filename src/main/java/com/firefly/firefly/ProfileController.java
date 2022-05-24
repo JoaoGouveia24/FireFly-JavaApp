@@ -20,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -120,6 +121,7 @@ public class ProfileController implements Initializable {
      void Main(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
+        TableViewScene.setFill(Color.TRANSPARENT);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(TableViewScene);
         window.show();

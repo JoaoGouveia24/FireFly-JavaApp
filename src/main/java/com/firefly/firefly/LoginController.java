@@ -5,6 +5,7 @@ import com.google.common.hash.Hashing;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.io.IOException;
@@ -62,6 +64,7 @@ public class LoginController extends DatabaseConnetion{
 
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("RegisterFrame1.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
+        TableViewScene.setFill(Color.TRANSPARENT);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(TableViewScene);
         window.show();
@@ -105,6 +108,7 @@ public class LoginController extends DatabaseConnetion{
 
             Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainPage.fxml"));
             Scene TableViewScene = new Scene(tableViewParent);
+            TableViewScene.setFill(Color.TRANSPARENT);
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(TableViewScene);
             window.show();
@@ -116,5 +120,9 @@ public class LoginController extends DatabaseConnetion{
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+    @FXML
+    void Quit(){
+        javafx.application.Platform.exit();
     }
 }

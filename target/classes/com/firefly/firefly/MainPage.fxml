@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
+<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
    <children>
-      <Pane layoutY="-5.0" prefHeight="820.0" prefWidth="200.0" style="-fx-background-color: #363636; -fx-background-radius: 25;">
+      <Pane layoutY="-5.0" prefHeight="820.0" prefWidth="200.0" style="-fx-background-color: #363636; -fx-background-radius: 40;">
          <children>
             <ImageView fitHeight="96.0" fitWidth="180.0" layoutX="40.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -37,14 +37,12 @@
                </children>
             </VBox>
          </children></Pane>
-      <Pane layoutY="732.0" prefHeight="88.0" prefWidth="1200.0" style="-fx-background-color: #6acdd4;" />
       <JFXTextField fx:id="SearchBar" focusColor="#6acdd4" layoutX="430.0" layoutY="49.0" onKeyTyped="#searchS" prefHeight="26.0" prefWidth="400.0" promptText="Search..." style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
       <JFXListView id="list-cell" fx:id="listView" layoutX="429.0" layoutY="87.0" prefHeight="240.0" prefWidth="400.0" showTooltip="true" style="-fx-background-color: #363636; -fx-background-radius: 10;" styleClass="list-cell" stylesheets="@Style.css" visible="false" />
       <Pane layoutY="666.0" prefHeight="150.0" prefWidth="1200.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 40;">
          <children>
-            <Pane layoutY="14.0" prefHeight="148.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40;">
+            <Pane layoutX="5.0" layoutY="5.0" prefHeight="140.0" prefWidth="1190.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40;">
                <children>
-                  <Pane layoutX="-3.0" layoutY="71.0" prefHeight="88.0" prefWidth="1206.0" style="-fx-background-color: #2e2e2e;" />
                   <ImageView fx:id="Back" fitHeight="30.0" fitWidth="25.0" layoutX="470.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/mediaIcons/icons8-back-30.png" />

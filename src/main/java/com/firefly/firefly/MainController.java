@@ -27,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -157,6 +158,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
         }
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("LoginFrame.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
+        TableViewScene.setFill(Color.TRANSPARENT);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(TableViewScene);
         window.show();
@@ -165,6 +167,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
     public void UpldoadPage(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("UploadPage.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
+        TableViewScene.setFill(Color.TRANSPARENT);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(TableViewScene);
         window.show();
@@ -172,6 +175,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
     public void ProfilePage(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("ProfileFrame.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
+        TableViewScene.setFill(Color.TRANSPARENT);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(TableViewScene);
         window.show();
@@ -237,31 +241,6 @@ public class MainController extends DatabaseConnetion implements Initializable{
         mediaPlayer.play();
         PlayImg.setVisible(false);
         PauseImg.setVisible(true);
-        MediaPlayerController();
-    }
-
-    void MediaPlayerController(){
-        Platform.runLater(() -> {
-
-            Volume.valueProperty().addListener(ov -> {
-                if (Volume.isValueChanging()) {
-                    mediaPlayer.setVolume(Volume.getValue());
-                }
-            });
-            mediaPlayer.currentCountProperty().addListener(ov -> {
-                duration = mediaPlayer.getMedia().getDuration();
-                actvalores();
-            });
-            TimeP.valueProperty().addListener(ov -> {
-                if (TimeP.isPressed()) {
-                    mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(TimeP.getValue() / 100));
-                }
-            });
-        });
-    }
-
-    public void stop () {
-        Platform.exit();
     }
 
     //Methods to
@@ -305,7 +284,6 @@ public class MainController extends DatabaseConnetion implements Initializable{
             }else{listView.setVisible(true);}
         });
 
-
         try {
             listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
                 @Override
@@ -320,7 +298,28 @@ public class MainController extends DatabaseConnetion implements Initializable{
                     return null;
                 }
             });
+
+            Platform.runLater(() -> {
+
+                Volume.valueProperty().addListener(ov -> {
+                    if (Volume.isValueChanging()) {
+                        mediaPlayer.setVolume(Volume.getValue());
+                    }
+                });
+                mediaPlayer.currentCountProperty().addListener(ov -> {
+                    duration = mediaPlayer.getMedia().getDuration();
+                    actvalores();
+                });
+                TimeP.valueProperty().addListener(ov -> {
+                    if (TimeP.isPressed()) {
+                        mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(TimeP.getValue() / 100));
+                    }
+                });
+            });
+
+
         }catch (NullPointerException e){
+            System.out.println("Media Null - Not Critical");
         }
     }
 
@@ -336,4 +335,8 @@ public class MainController extends DatabaseConnetion implements Initializable{
                 });
             }
         }
+
+    public void stop () {
+        Platform.exit();
+    }
     }

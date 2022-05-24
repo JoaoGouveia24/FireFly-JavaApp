@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -137,6 +138,7 @@ public class RegisterController {
 
                 Parent tableViewParent = FXMLLoader.load(getClass().getResource("LoginFrame.fxml"));
                 Scene TableViewScene = new Scene(tableViewParent);
+                TableViewScene.setFill(Color.TRANSPARENT);
                 Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
                 window.setScene(TableViewScene);
                 window.show();
@@ -167,6 +169,7 @@ public class RegisterController {
     public void changeLogin(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("LoginFrame.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
+        TableViewScene.setFill(Color.TRANSPARENT);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(TableViewScene);
         window.show();
