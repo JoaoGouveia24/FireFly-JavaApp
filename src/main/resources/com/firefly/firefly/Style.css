@@ -25,10 +25,6 @@
     -fx-background-color: linear-gradient(to left,  #6acdd4, #b251ff);
 }
 
-.combo-box .cell:selected {
-    -fx-text-fill: white;
-}
-
 .list-cell:even { /* <=== changed to even */
     -fx-background-color: #6acdd4;
     -fx-text-fill: #303030;

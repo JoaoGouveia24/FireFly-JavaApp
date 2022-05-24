@@ -8,10 +8,12 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -43,8 +45,14 @@ public class ProfileController implements Initializable {
     private JFXButton Edit;
     @FXML
     private JFXButton Save;
+    //
     @FXML
     private Label AlbumName;
+    @FXML
+    private Pane AlbumPaneDel;
+    @FXML
+    private JFXButton Del;
+
 
     public boolean PChek;
 
@@ -142,10 +150,6 @@ public class ProfileController implements Initializable {
         PassCheck.setVisible(true);
     }
 
-    @FXML
-    void AlbumMenu(){
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -176,5 +180,22 @@ public class ProfileController implements Initializable {
             e.printStackTrace();
         }
 
+        ListviewAlb.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent click) {
+
+                if (click.getClickCount() == 1) {
+                    //Use ListView's getSelected Item
+                    var currentItemSelected = ListviewAlb.getSelectionModel().getSelectedItem();
+                    //use this to do whatever you want to. Open Link etc.
+                    AlbumPaneDel.setLayoutY(ListviewAlb.getLayoutY()+5);
+                    AlbumPaneDel.setVisible(true);
+                }
+            }
+        });
+
     }
+
+
 }

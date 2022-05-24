@@ -175,15 +175,7 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
                 PreparedStatement Ins;
                 Ins = conectDB.prepareStatement("Insert into Tracks(Track_Name,Track_Bin,Album_Id) values (?,?,?)");
                 Ins.setString(1,MusicName.getText());
-                //
-                Blob blob = conectDB.createBlob();
-                ObjectOutputStream oos;
-                oos = new ObjectOutputStream(blob.setBinaryStream(1));
-                oos.writeObject(file);
-                oos.close();
-                Ins.setBlob(2, blob);
-                blob.free();
-                //
+                Ins.setString(2, file.getPath());
                 Ins.setString(3, String.valueOf(AID));
                 Ins.executeUpdate();
                 Ins.close();

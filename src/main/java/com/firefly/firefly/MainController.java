@@ -72,7 +72,6 @@ public class MainController extends DatabaseConnetion implements Initializable{
     private MediaPlayer mediaPlayer;
     private Media media;
     private Duration duration;
-    private String Music = "";
     @FXML
     private JFXButton MainButton;
     //======Log Out Buttons=====//
@@ -80,23 +79,20 @@ public class MainController extends DatabaseConnetion implements Initializable{
     private ImageView Log1;
     @FXML
     private ImageView Log2;
-    //======MenuButtons========//
-    @FXML
-    private JFXButton ProfileBtn;
     //=====SearchBar=========//
     @FXML
     private ListView<String> listView;
     @FXML
     private JFXTextField SearchBar;
     ObservableList data = FXCollections.observableArrayList();
-    @FXML
-    private Label well;
     //==========================================//
     public static int SSID;
     DatabaseConnetion connetion = new DatabaseConnetion();
     public String OLD = "";
     public int Cont;
+    public File Music;
 
+    public String Obj = "C:/Users/gouve/OneDrive/Documentos/Development/GitHub/FireFlyPAP/src/main/java/com/firefly/firefly/NullControl.mp3";
 
     //===========================================================================//
     //============================Methods Above==================================//
@@ -225,17 +221,23 @@ public class MainController extends DatabaseConnetion implements Initializable{
         Connection conectDB = connetion.getCon();
         PreparedStatement Load;
 
+        System.out.println(01);
         Load = conectDB.prepareStatement("SELECT Track_Bin FROM Tracks where Track_Name = ?");
         Load.setString(1, listView.getSelectionModel().getSelectedItem());
         ResultSet rs = Load.executeQuery();
 
-            InputStream is = rs.getBinaryStream(1);
-            File targetFile = new File("C:/Users/gouve/OneDrive/Documentos/Development/GitHub/FireFlyPAP/src/main/java/com/firefly/firefly/NullControl.mp3");
-            FileUtils.copyInputStreamToFile(is, targetFile);
+        System.out.println(02);
 
-            MainButton.setDisable(false);
-            mediaPlayer = new MediaPlayer(new Media("C:/Users/gouve/OneDrive/Documentos/Development/GitHub/FireFlyPAP/src/main/java/com/firefly/firefly/NullControl.mp3"));
-            mediaPlayer.play();
+        while (rs.next()){
+            Music = new File(rs.getString(1));
+        }
+        System.out.println(03);
+
+        MainButton.setDisable(false);
+        mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
+        mediaPlayer.play();
+        PlayImg.setVisible(false);
+        PauseImg.setVisible(true);
     }
 
     //Methods to
@@ -249,6 +251,28 @@ public class MainController extends DatabaseConnetion implements Initializable{
         listView.setVisible(false);
         root.setDisable(true);
 
+        File music = new File(String.valueOf(url));
+
+        listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent click) {
+
+                if (click.getClickCount() == 1) {
+                    //Use ListView's getSelected Item
+                    var currentItemSelected = listView.getSelectionModel().getSelectedItem();
+
+                    try {
+                        RetrieveData();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
         SearchBar.textProperty().addListener(txt ->{
             int check = SearchBar.getLength();
             if (check == 0){
@@ -258,7 +282,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
         });
 
         try {
-                mediaPlayer = new MediaPlayer(new Media(NullController.toURL().toExternalForm()));
+                mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
                 mediaPlayer.setVolume(100);
                 mediaPlayer.volumeProperty().bindBidirectional(Volume.valueProperty());
 
@@ -294,7 +318,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
                     }
                 });
             });
-        }catch (NullPointerException | MalformedURLException nullMed){
+        }catch (NullPointerException | MalformedURLException e){
             System.out.println("Media is null - Not Critical");
         }
     }

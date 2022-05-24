@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.UploadScript">
+<AnchorPane fx:id="ap" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.UploadScript">
    <children>
       <ImageView fitHeight="117.0" fitWidth="80.0" layoutX="560.0" layoutY="357.0" onMouseClicked="#ChoooseMediaFile" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -30,7 +30,7 @@
          </cursor>
       </JFXButton>
       <JFXTextField fx:id="MusicName" focusColor="WHITE" labelFloat="true" layoutX="458.0" layoutY="213.0" prefHeight="33.0" prefWidth="285.0" promptText="Music Name" style="-fx-text-inner-color: white;" unFocusColor="#6acdd4" />
-      <JFXComboBox id="combo-box " fx:id="Album" focusColor="WHITE" labelFloat="true" layoutX="458.0" layoutY="280.0" prefHeight="33.0" prefWidth="224.0" promptText="Album" styleClass="combo-box" stylesheets="@Style.css" unFocusColor="#6acdd4" />
+      <JFXComboBox fx:id="Album" focusColor="WHITE" labelFloat="true" layoutX="458.0" layoutY="280.0" prefHeight="33.0" prefWidth="224.0" promptText="Album" style="-fx-text-inner-color: white;" styleClass="combo-box" unFocusColor="#6acdd4" />
       <ImageView fitHeight="50.0" fitWidth="40.0" layoutX="704.0" layoutY="277.0" onMouseClicked="#AlOpen" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/icons/add.png" />
