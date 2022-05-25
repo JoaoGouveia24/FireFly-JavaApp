@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.RegisterController">
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.RegisterController">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -52,35 +52,10 @@
             <JFXPasswordField fx:id="Password" focusColor="#6acdd4" labelFloat="true" layoutX="438.0" layoutY="95.0" prefHeight="39.0" prefWidth="198.0" promptText="Password" style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
             <JFXPasswordField fx:id="PasswordC" focusColor="#6acdd4" labelFloat="true" layoutX="438.0" layoutY="177.0" prefHeight="39.0" prefWidth="198.0" promptText="Comfirm Password" style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
             <JFXCheckBox fx:id="DCL" checkedColor="#6acdd4" layoutX="193.0" layoutY="304.0" prefHeight="18.0" prefWidth="326.0" text="I hereby declare that I accept the terms and conditions..." textFill="WHITE" unCheckedColor="WHITE" underline="true" />
-            <Label fx:id="User" layoutX="294.0" layoutY="246.0" prefHeight="39.0" prefWidth="124.0" text="Username field is Empty!" textFill="#6acdd4" visible="false">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <Label fx:id="emailt" layoutX="294.0" layoutY="246.0" prefHeight="39.0" prefWidth="124.0" text="Email field is Empty!" textAlignment="JUSTIFY" textFill="#6acdd4" visible="false">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <Label fx:id="Pass" layoutX="294.0" layoutY="246.0" prefHeight="39.0" prefWidth="124.0" text="Passwords do not match!" textAlignment="JUSTIFY" textFill="#6acdd4" visible="false">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <Label fx:id="PassN" layoutX="294.0" layoutY="246.0" prefHeight="39.0" prefWidth="124.0" text="Password field is Empty!" textAlignment="JUSTIFY" textFill="#6acdd4" visible="false">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
             <JFXCheckBox fx:id="SeePass" checkedColor="#6acdd4" layoutX="483.0" layoutY="228.0" onAction="#See" text="Show Password" textFill="WHITE" unCheckedColor="WHITE" />
             <JFXTextField fx:id="SCP" focusColor="#6acdd4" labelFloat="true" layoutX="438.0" layoutY="177.0" prefHeight="39.0" prefWidth="198.0" promptText="Comfirm Password" style="-fx-text-inner-color: white;" unFocusColor="WHITE" visible="false" />
             <JFXTextField fx:id="SCP1" focusColor="#6acdd4" labelFloat="true" layoutX="438.0" layoutY="95.0" prefHeight="39.0" prefWidth="198.0" promptText="Password" style="-fx-text-inner-color: white;" unFocusColor="WHITE" visible="false" />
-            <Label fx:id="Declare" layoutX="225.0" layoutY="246.0" prefHeight="39.0" prefWidth="263.0" text="You need to check the terms and conditions before..." textAlignment="JUSTIFY" textFill="#6acdd4" visible="false">
-               <font>
-                  <Font size="11.0" />
-               </font>
-            </Label>
-            <Label fx:id="Lengh" layoutX="249.0" layoutY="258.0" text="Password must be at least 9 characters long!" textFill="#6acdd4" visible="false">
+            <Label fx:id="Declare" alignment="CENTER" contentDisplay="CENTER" layoutX="225.0" layoutY="246.0" prefHeight="39.0" prefWidth="263.0" text="You need to check the terms and conditions before..." textAlignment="JUSTIFY" textFill="#6acdd4" visible="false">
                <font>
                   <Font size="11.0" />
                </font>

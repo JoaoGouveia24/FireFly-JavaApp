@@ -101,7 +101,7 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
             System.out.println(Year);
             System.out.println(USID);
 
-            String Ins = "Insert into Album(Album_Name,Album_Year,User_Id) values ('"+ALbName+"','"+Year+"','"+USID+"')";
+            String Ins = "Insert into Album(Album_Name,Album_Year,Conta_Id) values ('"+ALbName+"','"+Year+"','"+USID+"')";
 
             System.out.println("temp 3");
 
@@ -131,7 +131,7 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
 
             PreparedStatement ps;
 
-            ps = conectDB.prepareStatement("SELECT Album_Name FROM Album WHERE User_Id =?");
+            ps = conectDB.prepareStatement("SELECT Album_Name FROM Album WHERE Conta_Id =?");
             ps.setString(1, String.valueOf(USID));
 
             ResultSet resultSet = ps.executeQuery();
@@ -212,7 +212,7 @@ public class UploadScript extends DatabaseConnetion implements Initializable {
 
                 PreparedStatement ps;
 
-                ps = conectDB.prepareStatement("SELECT Album_Name FROM Album WHERE User_Id =?");
+                ps = conectDB.prepareStatement("SELECT Album_Name FROM Album WHERE Conta_Id =?");
                 ps.setString(1, String.valueOf(USID));
 
                 ResultSet resultSet = ps.executeQuery();

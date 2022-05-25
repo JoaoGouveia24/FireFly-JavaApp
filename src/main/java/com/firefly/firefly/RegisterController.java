@@ -17,6 +17,8 @@ import javafx.stage.StageStyle;
 
 
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterController {
 
@@ -81,6 +83,17 @@ public class RegisterController {
         }
     }
 
+    private boolean validateEmail() {
+        Pattern p = Pattern.compile("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher m = p.matcher(Email.getText());
+        if(m.find() && m.group().equals(Email.getText())) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 
     //Method to regist into the Database...
     public void Regist(ActionEvent event) throws IOException {
@@ -93,48 +106,26 @@ public class RegisterController {
         btn++;
 
         if (usernameD.equals("")) {
-            Lengh.setVisible(false);
-            Declare.setVisible(false);
-            emailt.setVisible(false);
-            Pass.setVisible(false);
-            User.setVisible(true);
-            PassN.setVisible(false);
-        } else if (emailD.equals("")) {
-            Lengh.setVisible(false);
-            Declare.setVisible(false);
-            User.setVisible(false);
-            Pass.setVisible(false);
-            emailt.setVisible(true);
-            PassN.setVisible(false);
-        } else if(passwordD.equals("") && PasswordC.getText().equals("")) {
-            Lengh.setVisible(false);
-            Declare.setVisible(false);
-            Pass.setVisible(false);
-            emailt.setVisible(false);
-            User.setVisible(false);
-            PassN.setVisible(true);
-       } else if(!passwordD.equals(PasswordC.getText())) {
-            Lengh.setVisible(false);
-            Declare.setVisible(false);
-            emailt.setVisible(false);
-            User.setVisible(false);
-            PassN.setVisible(false);
-            Pass.setVisible(true);
-        }else if(passwordD.length()<9){
-            Declare.setVisible(false);
-            emailt.setVisible(false);
-            User.setVisible(false);
-            PassN.setVisible(false);
-            Pass.setVisible(false);
-            Lengh.setVisible(true);
-        }else if(!DCL.isSelected()){
-            Lengh.setVisible(false);
-            emailt.setVisible(false);
-            User.setVisible(false);
-            PassN.setVisible(false);
-            Pass.setVisible(false);
             Declare.setVisible(true);
-
+            Declare.setText("Username field is Empty!");
+        } else if (emailD.equals("")) {
+            Declare.setVisible(true);
+            Declare.setText("Email field is Empty!");
+        } else if(passwordD.equals("") && PasswordC.getText().equals("")) {
+            Declare.setVisible(true);
+            Declare.setText("Password field is Empty!");
+       } else if(!passwordD.equals(PasswordC.getText())) {
+            Declare.setVisible(true);
+            Declare.setText("Passwords do not match!");
+        }else if(passwordD.length()<9){
+            Declare.setVisible(true);
+            Declare.setText("Password must be at least 9 characters long!");
+        }else if(!DCL.isSelected()){
+            Declare.setVisible(true);
+            Declare.setText("You need to check the terms and conditions before...");
+        }else if(validateEmail() != true){
+            Declare.setVisible(true);
+            Declare.setText("Invalid Email");
         }else {
 
         Utilizador utilizador = new Utilizador(usernameD, emailD, passwordD);

@@ -27,7 +27,7 @@ public class Utilizador extends DatabaseConnetion{
 
         String HashedPass = Hashing.sha256().hashString(pass, StandardCharsets.UTF_8).toString();
 
-        String queryUser =("Insert into Conta(username, Email, Pass) Values('" + user + "','" + email + "','" + HashedPass + "');");
+        String queryUser =("Insert into Conta(Username, Email, Pass) Values('" + user + "','" + email + "','" + HashedPass + "');");
 
         System.out.println("Query INSERIR -> " + queryUser);
 

@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -52,9 +53,9 @@ public class MainController extends DatabaseConnetion implements Initializable{
     private Pane root;
     //==========Player=========//
     @FXML
-    private JFXSlider TimeP;
+    private Slider TimeP;
     @FXML
-    private JFXSlider Volume;
+    private Slider Volume;
     @FXML
     private ImageView PauseImg;
     @FXML
@@ -91,8 +92,6 @@ public class MainController extends DatabaseConnetion implements Initializable{
     public String OLD = "";
     public int Cont;
     public File Music;
-
-    public String Obj = "C:/Users/gouve/OneDrive/Documentos/Development/GitHub/FireFlyPAP/src/main/java/com/firefly/firefly/NullControl.mp3";
 
     //===========================================================================//
     //============================Methods Above==================================//
@@ -238,6 +237,31 @@ public class MainController extends DatabaseConnetion implements Initializable{
         mediaPlayer.play();
         PlayImg.setVisible(false);
         PauseImg.setVisible(true);
+        MediaPlayerController();
+    }
+
+    void MediaPlayerController(){
+        Platform.runLater(() -> {
+
+            Volume.valueProperty().addListener(ov -> {
+                if (Volume.isValueChanging()) {
+                    mediaPlayer.setVolume(Volume.getValue());
+                }
+            });
+            mediaPlayer.currentCountProperty().addListener(ov -> {
+                duration = mediaPlayer.getMedia().getDuration();
+                actvalores();
+            });
+            TimeP.valueProperty().addListener(ov -> {
+                if (TimeP.isPressed()) {
+                    mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(TimeP.getValue() / 100));
+                }
+            });
+        });
+    }
+
+    public void stop () {
+        Platform.exit();
     }
 
     //Methods to
@@ -281,12 +305,8 @@ public class MainController extends DatabaseConnetion implements Initializable{
             }else{listView.setVisible(true);}
         });
 
+
         try {
-                mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
-                mediaPlayer.setVolume(100);
-                mediaPlayer.volumeProperty().bindBidirectional(Volume.valueProperty());
-
-
             listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
                 @Override
                 public ListCell<String> call(ListView<String> stringListView) {
@@ -300,33 +320,11 @@ public class MainController extends DatabaseConnetion implements Initializable{
                     return null;
                 }
             });
-
-            Platform.runLater(() -> {
-
-                Volume.valueProperty().addListener(ov -> {
-                    if (Volume.isValueChanging()) {
-                        mediaPlayer.setVolume(Volume.getValue());
-                    }
-                });
-                mediaPlayer.currentCountProperty().addListener(ov -> {
-                    duration = mediaPlayer.getMedia().getDuration();
-                    actvalores();
-                });
-                TimeP.valueProperty().addListener(ov -> {
-                    if (TimeP.isPressed()) {
-                        mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(TimeP.getValue() / 100));
-                    }
-                });
-            });
-        }catch (NullPointerException | MalformedURLException e){
-            System.out.println("Media is null - Not Critical");
+        }catch (NullPointerException e){
         }
     }
 
         //Responsible to stop the Threads running...
-        public void stop () {
-            Platform.exit();
-        }
 
         //actvalores refreshs the values on the current media slider...
         public void actvalores () {

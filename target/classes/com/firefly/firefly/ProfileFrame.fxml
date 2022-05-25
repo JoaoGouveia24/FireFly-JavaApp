@@ -122,5 +122,14 @@
             <Label fx:id="AlbumName" alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="20.0" prefHeight="17.0" prefWidth="86.0" textAlignment="JUSTIFY" textOverrun="CLIP" wrapText="true" />
          </children>
       </Pane>
+      <JFXButton layoutX="27.0" layoutY="29.0" onAction="#Main" prefHeight="50.0" prefWidth="20.0">
+         <graphic>
+            <ImageView disable="true" fitHeight="40.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true" x="5.0">
+               <image>
+                  <Image url="@../../../images/icons/back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

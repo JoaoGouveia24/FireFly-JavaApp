@@ -25,7 +25,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 
-public class LoginController extends DatabaseConnetion implements Initializable {
+public class LoginController extends DatabaseConnetion{
 
     //login Fields
     @FXML
@@ -57,40 +57,6 @@ public class LoginController extends DatabaseConnetion implements Initializable 
     @FXML
     private Label lb1;
 
-    //See Better...-------------------------------------------------------------->
-    //Change to 1st image!
-    public void changeOne() {
-
-        Image img1 = new Image("src/main/resources/images/slider/img1.png");
-        Image img2 = new Image("src/main/resources/images/slider/img2.png");
-        Image img3 = new Image("src/main/resources/images/slider/img3.png");
-
-        final ToggleGroup group = new ToggleGroup();
-        Slider.setToggleGroup(group);
-        Slider1.setToggleGroup(group);
-        Slider2.setToggleGroup(group);
-
-        try {
-        if (group.getSelectedToggle() != null) {
-
-            if (group.getToggles().equals(Slider)) {
-                ContentImg.setImage(img1);
-
-            } else if (group.getToggles().equals(Slider1)) {
-                ContentImg.setImage(img2);
-
-            } else if (group.getToggles() == Slider2) {
-                ContentImg.setImage(img3);
-            }
-        }else{
-            ContentImg.setImage(img1);
-        }
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-    }
-
     //change to register page!
     public void changeRegistrar1(ActionEvent event) throws IOException {
 
@@ -112,7 +78,7 @@ public class LoginController extends DatabaseConnetion implements Initializable 
 
         PreparedStatement ps;
 
-        ps = conectDB.prepareStatement("SELECT * FROM Conta WHERE username=? && Pass=?");
+        ps = conectDB.prepareStatement("SELECT * FROM Conta WHERE Username=? && Pass=?");
 
 
         usernameD = LoginUsername.getText();
@@ -128,7 +94,7 @@ public class LoginController extends DatabaseConnetion implements Initializable 
 
             //Stores the id
             PreparedStatement id;
-            id = conectDB.prepareStatement("SELECT Conta_Id FROM Conta WHERE username=?");
+            id = conectDB.prepareStatement("SELECT Conta_Id FROM Conta WHERE Username=?");
 
             id.setString(1, usernameD);
             ResultSet IdForm = id.executeQuery();
@@ -150,23 +116,5 @@ public class LoginController extends DatabaseConnetion implements Initializable 
         }catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        /*
-        img1.setOpacity(0);
-        img2.setOpacity(0);
-        img3.setOpacity(0);
-
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.ZERO, new KeyValue(img1.opacityProperty(), 100)),
-                new KeyFrame(Duration.seconds(3), new KeyValue(img2.opacityProperty(),100)),
-                new KeyFrame(Duration.seconds(6), new KeyValue(img3.opacityProperty(),100))
-        );
-
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeline.play();*/
-
     }
 }
