@@ -12,17 +12,15 @@
 
 /* Timer */
 .Time>.thumb{
-    -fx-background-color: #2e2e2e;
+    -fx-background-color:  #6acdd4;
 }
-.Time>.animated-thumb{
-    -fx-background-color:  #2e2e2e;
-}
+
 .Time>.colored-track{
     -fx-background-color: linear-gradient(to right, #303030, #7104c9);
 }
 
 .UpLoadId{
-    -fx-background-color: linear-gradient(to left,  #6acdd4, #b251ff);
+    -fx-background-color: #6acdd4;
 }
 
 .list-cell:even { /* <=== changed to even */

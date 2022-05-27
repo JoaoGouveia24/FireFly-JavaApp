@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
@@ -110,6 +111,7 @@ public class LoginController extends DatabaseConnetion{
             Scene TableViewScene = new Scene(tableViewParent);
             TableViewScene.setFill(Color.TRANSPARENT);
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            //window.initStyle(StageStyle.UNDECORATED);
             window.setScene(TableViewScene);
             window.show();
 

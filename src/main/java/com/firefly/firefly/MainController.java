@@ -8,6 +8,10 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.animation.*;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,6 +34,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import org.apache.commons.io.FileUtils;
@@ -70,7 +75,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
     @FXML
     private ImageView Tumb;
     //=======Media Player=======//
-    private URI NullController = URI.create("C:/Users/gouve/Desktop/FireFly/FireFlyPAP/src/main/resources/NullControl.mp3");
+    private File NullController = new File("C:/Users/gouve/Desktop/FireFly/FireFlyPAP/src/main/resources/NullControl.mp3");
     private MediaPlayer mediaPlayer;
     private Media media;
     private Duration duration;
@@ -94,6 +99,8 @@ public class MainController extends DatabaseConnetion implements Initializable{
     public int Cont;
     public File Music;
 
+    private Boolean isMuted;
+
     //===========================================================================//
     //============================Methods Above==================================//
     //===========================================================================//
@@ -104,7 +111,6 @@ public class MainController extends DatabaseConnetion implements Initializable{
     public void PlayMusic(){
             if (mediaPlayer.getStatus() != MediaPlayer.Status.PLAYING) {
                 //MediaPlaterStuff
-                mediaPlayer = new MediaPlayer(new Media(""));
 
                 PlayImg.setVisible(false);
                 PauseImg.setVisible(true);
@@ -206,6 +212,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
             rs.close();
             pr.close();
             listView.setItems(data);
+
         }catch (SQLException e){
             System.out.println("");
         }catch (IndexOutOfBoundsException e){
@@ -241,6 +248,39 @@ public class MainController extends DatabaseConnetion implements Initializable{
         mediaPlayer.play();
         PlayImg.setVisible(false);
         PauseImg.setVisible(true);
+
+        VolumeChang();
+    }
+
+    void VolumeChang(){
+        Volume.valueProperty().addListener(observable -> {
+            mediaPlayer.setVolume(Volume.getValue());
+        });
+
+        mediaPlayer.totalDurationProperty().addListener(new ChangeListener<Duration>() {
+            @Override
+            public void changed(ObservableValue<? extends Duration> observableValue, Duration duration, Duration t1) {
+                TimeP.setMax(t1.toSeconds());
+            }
+        });
+        TimeP.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+                double currentTime = mediaPlayer.getCurrentTime().toSeconds();
+                if (Math.abs(currentTime - t1.doubleValue())> 0.5){
+                    mediaPlayer.seek(Duration.seconds(t1.doubleValue()));
+                }
+            }
+        });
+
+        mediaPlayer.currentTimeProperty().addListener(new ChangeListener<Duration>() {
+            @Override
+            public void changed(ObservableValue<? extends Duration> observableValue, Duration duration, Duration newTime) {
+                if (!TimeP.isValueChanging()){
+                    TimeP.setValue(newTime.toSeconds());
+                }
+            }
+        });
     }
 
     //Methods to
@@ -254,7 +294,8 @@ public class MainController extends DatabaseConnetion implements Initializable{
         listView.setVisible(false);
         root.setDisable(true);
 
-        File music = new File(String.valueOf(url));
+
+
 
         listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -285,6 +326,9 @@ public class MainController extends DatabaseConnetion implements Initializable{
         });
 
         try {
+
+            mediaPlayer.stop();
+
             listView.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
                 @Override
                 public ListCell<String> call(ListView<String> stringListView) {
@@ -299,18 +343,14 @@ public class MainController extends DatabaseConnetion implements Initializable{
                 }
             });
 
+
             Platform.runLater(() -> {
 
-                Volume.valueProperty().addListener(ov -> {
-                    if (Volume.isValueChanging()) {
-                        mediaPlayer.setVolume(Volume.getValue());
-                    }
-                });
-                mediaPlayer.currentCountProperty().addListener(ov -> {
+                mediaPlayer.currentCountProperty().addListener(ov2 -> {
                     duration = mediaPlayer.getMedia().getDuration();
                     actvalores();
                 });
-                TimeP.valueProperty().addListener(ov -> {
+                TimeP.valueProperty().addListener(ov3 -> {
                     if (TimeP.isPressed()) {
                         mediaPlayer.seek(mediaPlayer.getMedia().getDuration().multiply(TimeP.getValue() / 100));
                     }
@@ -339,4 +379,9 @@ public class MainController extends DatabaseConnetion implements Initializable{
     public void stop () {
         Platform.exit();
     }
+
+    @FXML
+    void Close(){javafx.application.Platform.exit();}
+
     }
+
