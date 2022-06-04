@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.ProfileController">
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40; -fx-border-color: #6acdd4; -fx-border-radius: 40; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.ProfileController">
    <children>
       <Pane layoutX="294.0" layoutY="111.0" prefHeight="528.0" prefWidth="612.0" style="-fx-background-color: #fff; -fx-background-radius: 50;">
          <children>

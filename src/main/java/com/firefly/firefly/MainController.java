@@ -3,6 +3,7 @@ package com.firefly.firefly;
 
 import com.firefly.firefly.Sql.DatabaseConnetion;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import javafx.animation.*;
@@ -28,6 +29,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -48,6 +51,8 @@ import java.nio.file.Path;
 import java.sql.*;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static javafx.scene.paint.Color.WHITE;
 
 //===========================================================================//
 //==============================Main Class===================================//
@@ -92,6 +97,7 @@ public class MainController extends DatabaseConnetion implements Initializable{
     @FXML
     private JFXTextField SearchBar;
     ObservableList data = FXCollections.observableArrayList();
+    ObservableList Likeddata = FXCollections.observableArrayList();
     //==========================================//
     public static int SSID;
     DatabaseConnetion connetion = new DatabaseConnetion();
@@ -99,12 +105,35 @@ public class MainController extends DatabaseConnetion implements Initializable{
     public int Cont;
     public File Music;
 
-    private Boolean isMuted;
+    @FXML
+    private Pane LikedPane;
+    @FXML
+    private Label LikeLbs;
+    @FXML
+    private ImageView Like;
+    @FXML
+    private ImageView Unlike;
+    @FXML
+    private JFXListView ListLike;
+
+
+    private int TrackPlay;
+    private Boolean MusicStatBoll;
+    private Boolean MediaCheck = false;
+    private int TracksId;
 
     //===========================================================================//
     //============================Methods Above==================================//
     //===========================================================================//
 
+
+    @FXML
+    void LikedShowUp(){
+            LikeLbs.setVisible(true);
+            LikedPane.setDisable(false);
+            LikedPane.setVisible(true);
+
+    }
 
        //---------------------------------------------------
 
@@ -225,31 +254,58 @@ public class MainController extends DatabaseConnetion implements Initializable{
     //Work here !Important
     void RetrieveData() throws SQLException, IOException {
 
+
         System.out.println("Retrieve Data Starts - 01");
 
-        connetion.ligar();
-        Connection conectDB = connetion.getCon();
-        PreparedStatement Load;
+        if (MediaCheck == false) {
+            connetion.ligar();
+            Connection conectDB = connetion.getCon();
+            PreparedStatement Load;
 
-        System.out.println(01);
-        Load = conectDB.prepareStatement("SELECT Track_Bin FROM Tracks where Track_Name = ?");
-        Load.setString(1, listView.getSelectionModel().getSelectedItem());
-        ResultSet rs = Load.executeQuery();
+            System.out.println(01);
+            Load = conectDB.prepareStatement("SELECT Track_Id, Track_Bin FROM Tracks where Track_Name = ?");
+            Load.setString(1, listView.getSelectionModel().getSelectedItem());
+            ResultSet rs = Load.executeQuery();
 
-        System.out.println(02);
+            System.out.println(02);
 
-        while (rs.next()){
-            Music = new File(rs.getString(1));
-        }
-        System.out.println(03);
+            while (rs.next()) {
+                TrackPlay = rs.getInt(1);
+                Music = new File(rs.getString(2));
+            }
+            System.out.println(03);
 
-        MainButton.setDisable(false);
-        mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
-        mediaPlayer.play();
-        PlayImg.setVisible(false);
-        PauseImg.setVisible(true);
+            MainButton.setDisable(false);
 
-        VolumeChang();
+            mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
+            mediaPlayer.play();
+            PlayImg.setVisible(false);
+            PauseImg.setVisible(true);
+            VolumeChang();
+            MediaCheck = true;
+
+            PreparedStatement l;
+
+            l = conectDB.prepareStatement("SELECT Favs FROM Fav WHERE Fav_Track = ? ");
+            l.setString(1, String.valueOf(TrackPlay));
+
+            ResultSet res = l.executeQuery();
+            while (res.next()) {
+                MusicStatBoll = res.getBoolean(1);
+            }
+
+            if (MusicStatBoll == true) {
+                Unlike.setVisible(false);
+                Unlike.setDisable(true);
+                Like.setVisible(true);
+                Like.setDisable(false);
+            } else if (MusicStatBoll == null) {
+                Like.setVisible(false);
+                Like.setDisable(true);
+                Unlike.setVisible(true);
+                Unlike.setDisable(false);
+            }
+        }else{mediaPlayer.stop(); MediaCheck = false;}
     }
 
     void VolumeChang(){
@@ -294,8 +350,14 @@ public class MainController extends DatabaseConnetion implements Initializable{
         listView.setVisible(false);
         root.setDisable(true);
 
+        //Liked Pane Settings...
+        LikeLbs.setVisible(false);
+        LikedPane.setDisable(true);
+        LikedPane.setVisible(false);
+        Unlike.setDisable(true);
 
 
+        GetLiked();
 
         listView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -382,6 +444,85 @@ public class MainController extends DatabaseConnetion implements Initializable{
 
     @FXML
     void Close(){javafx.application.Platform.exit();}
+
+
+    void GetLiked(){
+        connetion.ligar();
+        Connection conectDB = connetion.getCon();
+        PreparedStatement Mus;
+
+        try {
+            Mus = conectDB.prepareStatement("SELECT Fav_Track From fav WHERE Fav_Account = ?");
+            Mus.setString(1, String.valueOf(SSID));
+
+            ResultSet rs = Mus.executeQuery();
+            while (rs.next()){
+
+                TracksId = rs.getInt(1);
+
+                PreparedStatement Tracks;
+                Tracks = conectDB.prepareStatement("SELECT Track_Name FROM Tracks WHERE Track_Id = ?");
+                Tracks.setString(1, String.valueOf(TracksId));
+
+                ResultSet r = Tracks.executeQuery();
+                while(r.next()){
+                    String dataL = rs.getString(2);
+                    Likeddata.add(dataL);
+                }
+                ListLike.setItems(Likeddata);
+            }
+
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void ADD(){
+        connetion.ligar();
+        Connection conectDB = connetion.getCon();
+
+        PreparedStatement InsMusc;
+
+        try {
+            InsMusc = conectDB.prepareStatement("INSERT INTO Fav(Fav_Account,Fav_Track) values('"+SSID+"','"+TrackPlay+"') ");
+            InsMusc.executeUpdate();
+
+            Unlike.setVisible(false);
+            Unlike.setDisable(true);
+            Like.setVisible(true);
+            Like.setDisable(false);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void RemoveM(){
+        connetion.ligar();
+        Connection conectDB = connetion.getCon();
+
+        PreparedStatement InsMusc;
+
+        try {
+            InsMusc = conectDB.prepareStatement("DELETE FROM Fav WHERE Fav_Account = ? and Fav_Track = ?");
+            InsMusc.setString(1, String.valueOf(SSID));
+            InsMusc.setString(2, String.valueOf(TrackPlay));
+            InsMusc.executeUpdate();
+
+            Like.setVisible(false);
+            Like.setDisable(true);
+            Unlike.setVisible(true);
+            Unlike.setDisable(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     }
 

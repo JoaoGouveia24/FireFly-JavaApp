@@ -34,7 +34,7 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXButton>
-                  <JFXButton fx:id="ProfileBtn2" focusTraversable="false" onAction="#ProfilePage" prefHeight="45.0" prefWidth="213.0" style="-fx-background-radius: 40;" text="Liked" textFill="#6acdd4">
+                  <JFXButton fx:id="ProfileBtn2" focusTraversable="false" onAction="#LikedShowUp" prefHeight="45.0" prefWidth="213.0" style="-fx-background-radius: 40;" text="Liked" textFill="#6acdd4">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -49,6 +49,11 @@
          </children></Pane>
       <JFXTextField fx:id="SearchBar" focusColor="#6acdd4" layoutX="430.0" layoutY="49.0" onKeyTyped="#searchS" prefHeight="26.0" prefWidth="400.0" promptText="Search..." style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
       <JFXListView id="list-cell" fx:id="listView" layoutX="429.0" layoutY="87.0" prefHeight="240.0" prefWidth="400.0" showTooltip="true" style="-fx-background-color: #363636; -fx-background-radius: 10;" styleClass="list-cell" stylesheets="@Style.css" visible="false" />
+      <Pane fx:id="LikedPane" disable="true" layoutX="229.0" layoutY="120.0" prefHeight="444.0" prefWidth="894.0" style="-fx-background-color: #363636; -fx-background-radius: 40;" visible="false">
+         <children>
+            <JFXListView fx:id="ListLike" layoutX="13.0" layoutY="10.0" prefHeight="424.0" prefWidth="867.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40;" styleClass="list-cell" stylesheets="@Style.css" verticalGap="5.0" />
+         </children>
+      </Pane>
       <Pane fx:id="root" layoutX="400.0" layoutY="14.0" opacity="0.0" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #363636; -fx-background-radius: 40;">
          <children>
             <JFXButton fx:id="Accept" layoutX="51.0" layoutY="146.0" onAction="#Logout" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 30;" text="Accept" />
@@ -136,6 +141,22 @@
             </ImageView>
             <Slider fx:id="TimeP" layoutX="329.0" layoutY="77.0" max="1.0" prefHeight="5.0" prefWidth="542.0" styleClass="Time" stylesheets="@Style.css" />
             <Slider fx:id="Volume" layoutX="530.0" layoutY="101.0" max="1.0" styleClass="Time" stylesheets="@Style.css" value="1.0" />
+            <ImageView fx:id="Like" disable="true" fitHeight="150.0" fitWidth="32.0" layoutX="1104.0" layoutY="10.0" onMouseClicked="#RemoveM" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../images/icons/coracao.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="Unlike" fitHeight="150.0" fitWidth="32.0" layoutX="1104.0" layoutY="10.0" onMouseClicked="#ADD" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/icons/coracao(1).png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
          </children>
       </Pane>
       <ImageView fitHeight="150.0" fitWidth="20.0" layoutX="1159.0" layoutY="21.0" onMouseClicked="#Close" pickOnBounds="true" preserveRatio="true">
@@ -146,5 +167,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
+      <Label fx:id="LikeLbs" disable="true" layoutX="260.0" layoutY="94.0" text="Liked Musics:" textFill="WHITE" visible="false">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -32,8 +32,15 @@
     -fx-background-color: #239ca8;
     -fx-text-fill: #303030;
     -fx-background-radius: 25;
+    -fx-padding: 4px;
 }
 
+.list-cell:odd {
+    -fx-background-color: #6acdd4;
+    -fx-background-radius: 25;
+    -fx-start-margin: 4px;
+    -fx-end-margin: 4px;
+}
 .list-cell:filled:hover {
     -fx-background-color: #6acdd4;
     -fx-text-fill: #303030;
