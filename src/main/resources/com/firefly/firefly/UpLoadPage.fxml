@@ -11,8 +11,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40; -fx-border-color: #6acdd4; -fx-border-width: 2; -fx-border-radius: 40;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.UploadScript">
+<AnchorPane fx:id="ap" prefHeight="714.0" prefWidth="1184.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40; -fx-border-color: #6acdd4; -fx-border-width: 2; -fx-border-radius: 40;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.UploadScript">
    <children>
+      <ImageView fitHeight="750.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/Clouds/UpLoad.png" />
+         </image>
+      </ImageView>
       <ImageView fitHeight="117.0" fitWidth="80.0" layoutX="560.0" layoutY="357.0" onMouseClicked="#ChoooseMediaFile" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/icons/upload.png" />
@@ -39,7 +44,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Pane fx:id="AlbumCreateP" layoutX="129.0" layoutY="114.0" prefHeight="522.0" prefWidth="943.0" style="-fx-background-radius: 30;" styleClass="UpLoadId" stylesheets="@Style.css">
+      <Pane fx:id="AlbumCreateP" layoutX="129.0" layoutY="114.0" prefHeight="522.0" prefWidth="943.0" style="-fx-background-radius: 30;" styleClass="UpLoadId" stylesheets="@Style.css" visible="false">
          <children>
             <Pane id="UpLoadId" layoutX="5.0" layoutY="4.0" prefHeight="514.0" prefWidth="933.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 30;">
                <children>
@@ -71,7 +76,7 @@
          </children>
       </Pane>
       <Label fx:id="FilePathLbl" layoutX="458.0" layoutY="459.0" prefHeight="17.0" prefWidth="285.0" textFill="#63ffe3" />
-      <JFXButton layoutX="30.0" layoutY="25.0" minHeight="-Infinity" minWidth="-Infinity" onAction="#ReturnToMain" prefHeight="50.0" prefWidth="50.0">
+      <JFXButton layoutX="80.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" onAction="#ReturnToMain" prefHeight="50.0" prefWidth="50.0">
          <graphic>
             <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -83,7 +88,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <ImageView fitHeight="150.0" fitWidth="30.0" layoutX="99.0" layoutY="34.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="30.0" layoutX="149.0" layoutY="23.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/icons/refresh.png" />
          </image>

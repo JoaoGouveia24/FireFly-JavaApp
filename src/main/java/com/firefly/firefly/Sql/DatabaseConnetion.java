@@ -12,7 +12,7 @@ public class DatabaseConnetion {
     private String password;
 
     public DatabaseConnetion() {
-        url = "jdbc:mysql://localhost:3306/FireFly?useSSL=false";
+        url = "jdbc:mysql://localhost:3306/firefly?useSSL=false";
         user="root";
         password="";
         con = null;
