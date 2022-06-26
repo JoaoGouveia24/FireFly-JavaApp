@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40; -fx-border-color: #6acdd4; -fx-border-radius: 40; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
+<AnchorPane fx:id="Anchor" prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.MainController">
    <children>
       <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="392.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -81,9 +81,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Pane layoutX="14.0" layoutY="581.0" prefHeight="140.0" prefWidth="1161.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40; -fx-border-color: #6acdd4; -fx-border-radius: 40; -fx-border-width: 2;">
+      <Pane layoutX="14.0" layoutY="581.0" prefHeight="140.0" prefWidth="1173.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40; -fx-border-color: #6acdd4; -fx-border-radius: 40; -fx-border-width: 2;">
          <children>
-            <ImageView fx:id="Back" fitHeight="30.0" fitWidth="25.0" layoutX="470.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Back" fitHeight="30.0" fitWidth="25.0" layoutX="480.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-back-30.png" />
                </image>
@@ -91,7 +91,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="Forward" fitHeight="30.0" fitWidth="25.0" layoutX="707.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Forward" fitHeight="30.0" fitWidth="25.0" layoutX="717.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-forward-30.png" />
                </image>
@@ -99,7 +99,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="Replay" fitHeight="30.0" fitWidth="25.0" layoutX="658.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Replay" fitHeight="30.0" fitWidth="25.0" layoutX="671.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-rotate-30.png" />
                </image>
@@ -107,7 +107,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="Shuffle" fitHeight="25.0" fitWidth="25.0" layoutX="518.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Shuffle" fitHeight="25.0" fitWidth="25.0" layoutX="531.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-shuffle-arrows-30.png" />
                </image>
@@ -115,7 +115,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <JFXButton fx:id="MainButton" layoutX="575.0" layoutY="14.0" onAction="#PlayMusic" prefHeight="50.0" prefWidth="50.0" ripplerFill="#2e2e2e" style="-fx-background-color: #6acdd4; -fx-background-radius: 25;" text="." textAlignment="CENTER" textFill="#6acdd4">
+            <JFXButton fx:id="MainButton" layoutX="588.0" layoutY="15.0" onAction="#PlayMusic" prefHeight="50.0" prefWidth="50.0" ripplerFill="#2e2e2e" style="-fx-background-color: #6acdd4; -fx-background-radius: 25;" text="." textAlignment="CENTER" textFill="#6acdd4">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -123,7 +123,7 @@
                   <Font />
                </font>
             </JFXButton>
-            <ImageView fx:id="PlayImg" disable="true" fitHeight="25.0" fitWidth="25.0" layoutX="588.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="PlayImg" disable="true" fitHeight="25.0" fitWidth="25.0" layoutX="601.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-play-30.png" />
                </image>
@@ -131,7 +131,7 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <ImageView fx:id="PauseImg" disable="true" fitHeight="25.0" fitWidth="25.0" layoutX="588.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="PauseImg" disable="true" fitHeight="25.0" fitWidth="25.0" layoutX="601.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-pause-30.png" />
                </image>
@@ -139,9 +139,9 @@
                   <Rectangle2D />
                </viewport>
             </ImageView>
-            <Slider fx:id="TimeP" layoutX="329.0" layoutY="77.0" max="1.0" prefHeight="5.0" prefWidth="542.0" styleClass="Time" stylesheets="@Style.css" />
-            <Slider fx:id="Volume" layoutX="530.0" layoutY="101.0" max="1.0" styleClass="Time" stylesheets="@Style.css" value="1.0" />
-            <ImageView fx:id="Like" disable="true" fitHeight="150.0" fitWidth="32.0" layoutX="1104.0" layoutY="10.0" onMouseClicked="#RemoveM" pickOnBounds="true" preserveRatio="true" visible="false">
+            <Slider fx:id="TimeP" layoutX="342.0" layoutY="78.0" max="1.0" prefHeight="5.0" prefWidth="542.0" styleClass="Time" stylesheets="@Style.css" />
+            <Slider fx:id="Volume" layoutX="543.0" layoutY="100.0" max="1.0" styleClass="Time" stylesheets="@Style.css" value="1.0" />
+            <ImageView fx:id="Like" disable="true" fitHeight="150.0" fitWidth="32.0" layoutX="1127.0" layoutY="14.0" onMouseClicked="#RemoveM" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../images/icons/coracao.png" />
                </image>
@@ -149,7 +149,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="Unlike" fitHeight="150.0" fitWidth="32.0" layoutX="1104.0" layoutY="10.0" onMouseClicked="#ADD" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Unlike" fitHeight="150.0" fitWidth="32.0" layoutX="1127.0" layoutY="14.0" onMouseClicked="#ADD" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/icons/coracao(1).png" />
                </image>

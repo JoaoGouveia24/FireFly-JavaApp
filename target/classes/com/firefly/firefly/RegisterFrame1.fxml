@@ -12,14 +12,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.RegisterController">
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.RegisterController">
    <children>
       <ImageView fitHeight="750.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../images/Registar/RegistarFundo.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="cancel" buttonType="RAISED" layoutX="105.0" layoutY="645.0" onAction="#changeLogin" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #2e2e2e;" text="Cancel" textFill="#68cbd4" wrapText="true">
+      <JFXButton fx:id="cancel" buttonType="RAISED" layoutX="94.0" layoutY="666.0" onAction="#changeLogin" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #2e2e2e;" text="Cancel" textFill="#68cbd4" wrapText="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -27,7 +27,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="next" buttonType="RAISED" layoutX="966.0" layoutY="633.0" onAction="#Regist" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #68cbd4;" text="Finish">
+      <JFXButton fx:id="next" buttonType="RAISED" layoutX="966.0" layoutY="666.0" onAction="#Regist" prefHeight="25.0" prefWidth="124.0" style="-fx-background-color: #2e2e2e;" text="Finish" textFill="#68cbd4">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

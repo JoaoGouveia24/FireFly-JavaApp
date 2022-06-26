@@ -12,8 +12,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40; -fx-border-color: #6acdd4; -fx-border-radius: 40; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.ProfileController">
+<AnchorPane prefHeight="750.0" prefWidth="1200.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.firefly.firefly.ProfileController">
    <children>
+      <ImageView fitHeight="750.0" fitWidth="1200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/Clouds/Profile.png" />
+         </image>
+      </ImageView>
       <Pane layoutX="294.0" layoutY="111.0" prefHeight="528.0" prefWidth="612.0" style="-fx-background-color: #fff; -fx-background-radius: 50;">
          <children>
             <JFXListView fx:id="ListviewAlb" layoutX="416.0" layoutY="75.0" prefHeight="400.0" prefWidth="194.0" style="-fx-background-color: #fff;" styleClass="list-cell" stylesheets="@Style.css" />
@@ -122,7 +127,7 @@
             <Label fx:id="AlbumName" alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="20.0" prefHeight="17.0" prefWidth="86.0" textAlignment="JUSTIFY" textOverrun="CLIP" wrapText="true" />
          </children>
       </Pane>
-      <JFXButton layoutX="27.0" layoutY="29.0" onAction="#Main" prefHeight="50.0" prefWidth="20.0">
+      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#Main" prefHeight="50.0" prefWidth="20.0">
          <graphic>
             <ImageView disable="true" fitHeight="40.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true" x="5.0">
                <image>

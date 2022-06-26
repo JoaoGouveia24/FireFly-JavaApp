@@ -22,7 +22,6 @@ public class DatabaseConnetion {
         return con;
     }
 
-
     public void ligar() {
         try {
             con = DriverManager.getConnection(this.url, user, password);

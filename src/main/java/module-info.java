@@ -15,7 +15,6 @@ module com.firefly.firefly {
     requires org.apache.commons.io;
     requires java.sql;
 
-
     opens com.firefly.firefly to javafx.fxml;
     exports com.firefly.firefly;
 }
