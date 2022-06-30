@@ -49,11 +49,6 @@
          </children></Pane>
       <JFXTextField fx:id="SearchBar" focusColor="#6acdd4" layoutX="430.0" layoutY="49.0" onKeyTyped="#searchS" prefHeight="26.0" prefWidth="400.0" promptText="Search..." style="-fx-text-inner-color: white;" unFocusColor="WHITE" />
       <JFXListView id="list-cell" fx:id="listView" layoutX="429.0" layoutY="87.0" prefHeight="240.0" prefWidth="400.0" showTooltip="true" style="-fx-background-color: #363636; -fx-background-radius: 10;" styleClass="list-cell" stylesheets="@Style.css" visible="false" />
-      <Pane fx:id="LikedPane" disable="true" layoutX="229.0" layoutY="120.0" prefHeight="444.0" prefWidth="894.0" style="-fx-background-color: #363636; -fx-background-radius: 40;" visible="false">
-         <children>
-            <JFXListView fx:id="ListLike" layoutX="13.0" layoutY="10.0" prefHeight="424.0" prefWidth="867.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40;" styleClass="list-cell" stylesheets="@Style.css" verticalGap="5.0" />
-         </children>
-      </Pane>
       <Pane fx:id="root" layoutX="400.0" layoutY="14.0" opacity="0.0" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: #363636; -fx-background-radius: 40;">
          <children>
             <JFXButton fx:id="Accept" layoutX="51.0" layoutY="146.0" onAction="#Logout" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 30;" text="Accept" />
@@ -63,6 +58,21 @@
                   <Font size="20.0" />
                </font>
             </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="LikedPane" layoutX="229.0" layoutY="120.0" prefHeight="444.0" prefWidth="894.0" style="-fx-background-color: #363636; -fx-background-radius: 40;">
+         <children>
+            <JFXListView fx:id="ListLike" layoutX="13.0" layoutY="10.0" prefHeight="387.0" prefWidth="867.0" style="-fx-background-color: #363636; -fx-background-radius: 40;" styleClass="list-cell" stylesheets="@Style.css" verticalGap="5.0" />
+            <JFXButton layoutX="240.0" layoutY="405.0" onAction="#playLikedMusics" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 20;" text="P L A Y">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="483.0" layoutY="405.0" onAction="#shuffle" prefHeight="25.0" prefWidth="140.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 20;" text="S H U F F L E">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
          </children>
       </Pane>
       <ImageView fx:id="Log1" fitHeight="32.0" fitWidth="32.0" layoutX="1086.0" layoutY="46.0" onMouseClicked="#LogOut" onMouseEntered="#ChangeLogEnt" onMouseExited="#ChangeLogExi" pickOnBounds="true" preserveRatio="true">
@@ -83,7 +93,7 @@
       </ImageView>
       <Pane layoutX="14.0" layoutY="581.0" prefHeight="140.0" prefWidth="1173.0" style="-fx-background-color: #2e2e2e; -fx-background-radius: 40; -fx-border-color: #6acdd4; -fx-border-radius: 40; -fx-border-width: 2;">
          <children>
-            <ImageView fx:id="Back" fitHeight="30.0" fitWidth="25.0" layoutX="480.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Back" disable="true" fitHeight="30.0" fitWidth="25.0" layoutX="480.0" layoutY="27.0" onMouseClicked="#BackM" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-back-30.png" />
                </image>
@@ -91,7 +101,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="Forward" fitHeight="30.0" fitWidth="25.0" layoutX="717.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Forward" disable="true" fitHeight="30.0" fitWidth="25.0" layoutX="717.0" layoutY="27.0" onMouseClicked="#nextM" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-forward-30.png" />
                </image>
@@ -99,7 +109,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="Replay" fitHeight="30.0" fitWidth="25.0" layoutX="671.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Replay" fitHeight="30.0" fitWidth="25.0" layoutX="671.0" layoutY="27.0" onMouseClicked="#repeatStart" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-rotate-30.png" />
                </image>
@@ -107,7 +117,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="Shuffle" fitHeight="25.0" fitWidth="25.0" layoutX="531.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Shuffle" fitHeight="25.0" fitWidth="25.0" layoutX="531.0" layoutY="27.0" onDragDetected="#shuffle" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-shuffle-arrows-30.png" />
                </image>
@@ -152,6 +162,20 @@
             <ImageView fx:id="Unlike" fitHeight="150.0" fitWidth="32.0" layoutX="1127.0" layoutY="14.0" onMouseClicked="#ADD" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/icons/coracao(1).png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <Label fx:id="PlayingLb" layoutX="72.0" layoutY="19.0" text="Playing..." textFill="WHITE" />
+            <Label fx:id="MusicNameLb" layoutX="87.0" layoutY="41.0" prefHeight="25.0" prefWidth="109.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="ReplayON" disable="true" fitHeight="10.0" fitWidth="10.0" layoutX="696.0" layoutY="25.0" onMouseClicked="#repeatStart" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../images/mediaIcons/full-moon.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />

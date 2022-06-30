@@ -23,7 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
+import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -171,6 +171,8 @@ public class ProfileController implements Initializable {
     }
 
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         USIDL = LgI.USER_SESSION_ID;
@@ -206,11 +208,11 @@ public class ProfileController implements Initializable {
             public void handle(MouseEvent click) {
 
                 if (click.getClickCount() == 1) {
-                    //Use ListView's getSelected Item
-                    var currentItemSelected = ListviewAlb.getSelectionModel().getSelectedItem();
-                    //use this to do whatever you want to. Open Link etc.
-                    AlbumPaneDel.setLayoutY(ListviewAlb.getLayoutY()+5);
-                    AlbumPaneDel.setVisible(true);
+
+                    try {
+                        Desktop.getDesktop().browse(new URL("http://localhost/FireFly/FilesPhp/").toURI());
+                    } catch (Exception e) {}
+
                 }
             }
         });

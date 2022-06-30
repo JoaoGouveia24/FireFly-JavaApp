@@ -121,12 +121,6 @@
             </Pane>
          </children>
       </Pane>
-      <Pane fx:id="AlbumPaneDel" layoutX="890.0" layoutY="111.0" prefHeight="102.0" prefWidth="194.0" style="-fx-background-color: #68cbd4; -fx-background-radius: 60;" visible="false">
-         <children>
-            <JFXButton fx:id="Del" layoutX="35.0" layoutY="51.0" prefHeight="32.0" prefWidth="125.0" style="-fx-background-color: #ffff; -fx-background-radius: 25;" text="Delete" />
-            <Label fx:id="AlbumName" alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="20.0" prefHeight="17.0" prefWidth="86.0" textAlignment="JUSTIFY" textOverrun="CLIP" wrapText="true" />
-         </children>
-      </Pane>
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#Main" prefHeight="50.0" prefWidth="20.0">
          <graphic>
             <ImageView disable="true" fitHeight="40.0" fitWidth="139.0" pickOnBounds="true" preserveRatio="true" x="5.0">
