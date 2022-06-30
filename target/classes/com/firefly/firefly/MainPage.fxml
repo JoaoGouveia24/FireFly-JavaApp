@@ -53,7 +53,7 @@
          <children>
             <JFXButton fx:id="Accept" layoutX="51.0" layoutY="146.0" onAction="#Logout" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 30;" text="Accept" />
             <JFXButton fx:id="Decline" layoutX="240.0" layoutY="146.0" onAction="#noth" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: #6acdd4; -fx-background-radius: 30;" text="Decline" />
-            <Label layoutX="58.0" layoutY="76.0" prefHeight="30.0" prefWidth="284.0" text="Are you sure you want Log-out?" textFill="#6acdd4">
+            <Label layoutX="58.0" layoutY="76.0" prefHeight="30.0" prefWidth="284.0" text="Are you sure you want Logout?" textFill="#6acdd4">
                <font>
                   <Font size="20.0" />
                </font>
@@ -117,7 +117,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fx:id="Shuffle" fitHeight="25.0" fitWidth="25.0" layoutX="531.0" layoutY="27.0" onDragDetected="#shuffle" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Shuffle" fitHeight="25.0" fitWidth="25.0" layoutX="531.0" layoutY="27.0" onMouseClicked="#shuffle" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/mediaIcons/icons8-shuffle-arrows-30.png" />
                </image>

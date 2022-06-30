@@ -1,5 +1,6 @@
 package com.firefly.firefly;
 
+import com.firefly.firefly.Sql.DatabaseConnetion;
 import com.firefly.firefly.Sql.Utilizador;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -14,10 +15,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,6 +65,8 @@ public class RegisterController {
     @FXML
     private JFXCheckBox DCL;
 
+    DatabaseConnetion connetion = new DatabaseConnetion();
+
 
     //method to see the passwords...
     public void See(){
@@ -97,7 +101,7 @@ public class RegisterController {
 
 
     //Method to regist into the Database...
-    public void Regist(ActionEvent event) throws IOException {
+    public void Regist(ActionEvent event) throws IOException, SQLException {
 
         int btn = 0;
         String usernameD = Username.getText();
@@ -106,7 +110,21 @@ public class RegisterController {
 
         btn++;
 
-        if (usernameD.equals("")) {
+        connetion.ligar();
+        Connection conectDB = connetion.getCon();
+
+        PreparedStatement rp;
+
+
+        rp = conectDB.prepareStatement("SELECT Username FROM Conta WHERE Username = ?");
+        rp.setString(1, usernameD);
+
+        ResultSet res = rp.executeQuery();
+
+        if (res.next()){
+            Declare.setVisible(true);
+            Declare.setText("Username already taken!");
+        }else if (usernameD.equals("")) {
             Declare.setVisible(true);
             Declare.setText("Username field is Empty!");
         } else if (emailD.equals("")) {

@@ -135,6 +135,8 @@ public class MainController extends DatabaseConnetion implements Initializable{
 
     public int track_Id;
 
+    public boolean MusicCheck = false;
+
     //===========================================================================//
     //============================Methods Above==================================//
     //===========================================================================//
@@ -208,10 +210,9 @@ public class MainController extends DatabaseConnetion implements Initializable{
     }
     //Change scene to LoginFrame....
     public void Logout(ActionEvent event) throws IOException {
-        try {
+
+        if (MusicCheck == true){
             mediaPlayer.stop();
-        }catch(NullPointerException null2){
-            System.out.println("Media is null - Not Critical");
         }
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("LoginFrame.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
@@ -222,14 +223,22 @@ public class MainController extends DatabaseConnetion implements Initializable{
     }
 
     public void UpldoadPage(ActionEvent event) throws IOException {
+
+        if (MusicCheck == true){
+            mediaPlayer.stop();
+        }
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("UploadPage.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
         TableViewScene.setFill(Color.TRANSPARENT);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(TableViewScene);
         window.show();
+
     }
     public void ProfilePage(ActionEvent event) throws IOException {
+        if (MusicCheck == true){
+            mediaPlayer.stop();
+        }
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("ProfileFrame.fxml"));
         Scene TableViewScene = new Scene(tableViewParent);
         TableViewScene.setFill(Color.TRANSPARENT);
@@ -283,66 +292,76 @@ public class MainController extends DatabaseConnetion implements Initializable{
         Shuffle.setDisable(true);
         Replay.setDisable(false);
 
-        System.out.println("Retrieve Data Starts - 01");
+            System.out.println("Retrieve Data Starts - 01");
 
             connetion.ligar();
             Connection conectDB = connetion.getCon();
             PreparedStatement Load;
 
-            System.out.println(01);
-            Load = conectDB.prepareStatement("SELECT Track_Id, Track_Bin, Track_Name FROM Tracks where Track_Id = ?");
-            Load.setString(1, String.valueOf(track_Id));
-            ResultSet rs = Load.executeQuery();
+            if (MusicCheck == true){
 
-            System.out.println(02);
+                mediaPlayer.stop();
 
-            while (rs.next()) {
-                TrackPlay = rs.getInt(1);
-                Music = new File(rs.getString(2));
-                MusicNameLb.setText(rs.getString(3));
             }
-            System.out.println(03);
 
-            MainButton.setDisable(false);
-            mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
-            mediaPlayer.stop();
+                System.out.println(01);
+                Load = conectDB.prepareStatement("SELECT Track_Id, Track_Bin, Track_Name FROM Tracks where Track_Id = ?");
+                Load.setString(1, String.valueOf(track_Id));
+                ResultSet rs = Load.executeQuery();
 
-            mediaPlayer.play();
+                System.out.println(02);
 
-            PlayImg.setVisible(false);
-            PauseImg.setVisible(true);
-            VolumeChang();
-            MediaCheck = true;
+                while (rs.next()) {
+                    TrackPlay = rs.getInt(1);
+                    Music = new File(rs.getString(2));
+                    MusicNameLb.setText(rs.getString(3));
+                }
+                System.out.println(03);
 
-            MusicNameLb.setVisible(true);
-            PlayingLb.setVisible(true);
+                MainButton.setDisable(false);
+                mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
 
-            int i = 0;
-            int c = 0;
+                mediaPlayer.play();
+
+                PlayImg.setVisible(false);
+                PauseImg.setVisible(true);
+                VolumeChang();
+                MediaCheck = true;
+
+                MusicNameLb.setVisible(true);
+                PlayingLb.setVisible(true);
 
 
-            System.out.println("Check Likes start!");
+                System.out.println("Check Likes start!");
 
-            while (i != MusicIDs.size()-1){
+                boolean Fav = false;
 
-                c = MusicIDs.get(i);
+                PreparedStatement s;
+                s = conectDB.prepareStatement("SELECT Fav_Track FROM Fav WHERE Fav_Account = ?");
+                s.setString(1, String.valueOf(SSID));
+                ResultSet ret = s.executeQuery();
 
-                System.out.println(i+" - "+c);
+                while (ret.next()){
+                    if(ret.getInt(1)== TrackPlay){
+                        Fav = true;
+                    }
+                }
 
-                if ( c == TrackPlay) {
-                    Unlike.setVisible(true);
-                    Unlike.setDisable(false);
-                    Like.setVisible(false);
-                    Like.setDisable(true);
-                } else {
-                    Like.setVisible(true);
-                    Like.setDisable(false);
+                if (Fav == true){
                     Unlike.setVisible(false);
                     Unlike.setDisable(true);
+                    Like.setVisible(true);
+                    Like.setDisable(false);
+                    System.out.println("Yes");
+                }else{
+                    Like.setVisible(false);
+                    Like.setDisable(true);
+                    Unlike.setVisible(true);
+                    Unlike.setDisable(false);
+                    System.out.println("No");
                 }
-                i++;
-            }
 
+            MusicCheck = true;
     }
 
 
@@ -598,6 +617,13 @@ public class MainController extends DatabaseConnetion implements Initializable{
 
     public void shuffle(){
 
+        if (MusicCheck == true){
+            mediaPlayer.stop();
+        }
+
+
+        Shuffle.setDisable(false);
+
         int number = MusicArraysName.size();
         Random rand = new Random();
 
@@ -633,11 +659,11 @@ public class MainController extends DatabaseConnetion implements Initializable{
                 Like.setVisible(true);
                 Like.setDisable(false);
 
+                MusicCheck = true;
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-
 
         }
 
@@ -646,8 +672,14 @@ public class MainController extends DatabaseConnetion implements Initializable{
 
     public void playLikedMusics(){
 
+        if (MusicCheck == true){
+            mediaPlayer.stop();
+        }
+
         Forward.setDisable(false);
         Back.setDisable(false);
+
+        Shuffle.setDisable(false);
 
         if (MusicArraysName.size()<=0){
 
@@ -673,12 +705,11 @@ public class MainController extends DatabaseConnetion implements Initializable{
                     Like.setVisible(true);
                     Like.setDisable(false);
 
+                    MediaCheck = true;
 
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
-
-
             }
         }
 
@@ -687,27 +718,31 @@ public class MainController extends DatabaseConnetion implements Initializable{
 
         XCD = XCD+1;
 
-        if (XCD > MusicArraysPath.size()){
+        try {
+            if (XCD > MusicArraysPath.size()) {
 
-        }else {
-            Music = new File(MusicArraysPath.get(XCD));
-            try {
-                mediaPlayer.stop();
+            } else {
+                Music = new File(MusicArraysPath.get(XCD));
+                try {
+                    mediaPlayer.stop();
 
-                mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
+                    mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
 
-                mediaPlayer.play();
-                MusicNameLb.setText(MusicArraysName.get(XCD));
+                    mediaPlayer.play();
+                    MusicNameLb.setText(MusicArraysName.get(XCD));
 
-                PlayImg.setVisible(false);
-                PauseImg.setVisible(true);
-                VolumeChang();
-                MusicNameLb.setVisible(true);
-                PlayingLb.setVisible(true);
+                    PlayImg.setVisible(false);
+                    PauseImg.setVisible(true);
+                    VolumeChang();
+                    MusicNameLb.setVisible(true);
+                    PlayingLb.setVisible(true);
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("Array Null");
         }
     }
 
@@ -715,32 +750,37 @@ public class MainController extends DatabaseConnetion implements Initializable{
     void BackM(){
         XCD = XCD-1;
 
-        if (MusicArraysPath.size() <= 0){
 
-        }else {
-            Music = new File(MusicArraysPath.get(XCD));
-            try {
-                mediaPlayer.stop();
+        try {
+            if (MusicArraysPath.size() <= 0) {
 
-                mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
+            } else {
+                Music = new File(MusicArraysPath.get(XCD));
+                try {
+                    mediaPlayer.stop();
 
-                mediaPlayer.play();
-                MusicNameLb.setText(MusicArraysName.get(XCD));
+                    mediaPlayer = new MediaPlayer(new Media(Music.toURI().toURL().toExternalForm()));
 
-                PlayImg.setVisible(false);
-                PauseImg.setVisible(true);
-                VolumeChang();
-                MusicNameLb.setVisible(true);
-                PlayingLb.setVisible(true);
+                    mediaPlayer.play();
+                    MusicNameLb.setText(MusicArraysName.get(XCD));
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
+                    PlayImg.setVisible(false);
+                    PauseImg.setVisible(true);
+                    VolumeChang();
+                    MusicNameLb.setVisible(true);
+                    PlayingLb.setVisible(true);
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
             }
-        }
+        }catch (IndexOutOfBoundsException e){
+        System.out.println("Array Null");
+    }
     }
 
 
-    // Repeat function need attention...
+    // Repeat function...
     @FXML
     void repeatStart() {
 
@@ -756,7 +796,4 @@ public class MainController extends DatabaseConnetion implements Initializable{
             ReplayON.setVisible(false);
         }
     }
-
-
 }
-
