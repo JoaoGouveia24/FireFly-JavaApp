@@ -19,8 +19,8 @@
 
 ## Key Features
 
-* Your Musics - You can admnistrate your own musics!
-  - You can upload and listen your own musics in database.
+* Your Musics - You can administer your own music's!
+  - You can upload and listen your own music's in database.
 * Musics From other People!
   - You can eather listen musics from another people.
 * Create Albums 
