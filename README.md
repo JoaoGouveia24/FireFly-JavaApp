@@ -15,7 +15,7 @@
 
 </p>
 
-![screenshot]([https://raw.githubusercontent.com/amitmerchant1990/electron-markdownify/master/app/img/markdownify.gif](https://github.com/JoaoGouveia24/FireFly-Music/blob/main/src/main/resources/images/MainTittle.jpg))
+![screenshot](https://github.com/JoaoGouveia24/FireFly-Music/blob/main/src/main/resources/images/MainTittle.jpg)
 
 ## Key Features
 
