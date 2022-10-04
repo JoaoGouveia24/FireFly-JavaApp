@@ -10,6 +10,8 @@ public class DatabaseConnetion {
     private String url;
     private String user;
     private String password;
+    private Connection con;
+
 
     public DatabaseConnetion() {
         url = "jdbc:mysql://localhost:3306/firefly?useSSL=false";
@@ -30,7 +32,7 @@ public class DatabaseConnetion {
         }
     }
 
-    private Connection con;
+
 
     public void desligar() {
         try {

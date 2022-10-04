@@ -127,4 +127,25 @@ public class LoginController extends DatabaseConnetion{
     void Quit(){
         javafx.application.Platform.exit();
     }
+
+    public void initialize(){
+
+        try {
+            DatabaseConnetion connetion = new DatabaseConnetion();
+            connetion.ligar();
+            Connection conectDB = connetion.getCon();
+
+            if (conectDB.isClosed()) {
+                System.out.println("Disconnected");
+            }else{
+                System.out.println("Connected");
+            }
+
+
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }
