@@ -10,12 +10,12 @@
 <h4 align="center">An application with musical power!</h4>
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
-  <a href="#Dependencies">Dependencies</a> •
+  • <a href="#key-features">Key Features</a>
+  • <a href="#Dependencies">Dependencies</a> 
 
 </p>
 
-![screenshot](https://github.com/JoaoGouveia24/FireFly-Music/blob/main/src/main/resources/images/MainTittle.jpg)
+![screenshot](https://github.com/JoaoGouveia24/FireFly-Music/blob/main/src/main/resources/images/MainTittle.png)
 
 ## Key Features
 
